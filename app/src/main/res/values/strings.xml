@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">StarWarsCharacters</string>
+    <string name="search_hint">Insert name for film</string>
+</resources>
