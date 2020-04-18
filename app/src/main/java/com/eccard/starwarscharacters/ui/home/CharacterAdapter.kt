@@ -18,10 +18,23 @@ class CharacterAdapter (appExecutors: AppExecutors,
             return oldItem.charactter.id == newItem.charactter.id
         }
 
+        private fun hasSameFoundContent(
+            oldItem: CharacterAdapterPojo,
+            newItem: CharacterAdapterPojo
+        ): Boolean {
+            var isSame = false
+            if (oldItem.foundFilm == null && newItem.foundFilm == null) {
+                isSame = true
+            } else if (oldItem.foundFilm != null && newItem.foundFilm != null) {
+                isSame = oldItem.foundFilm == newItem.foundFilm
+            }
+            return isSame
+        }
+
         override fun areContentsTheSame(oldItem: CharacterAdapterPojo, newItem: CharacterAdapterPojo): Boolean {
             return oldItem.charactter.name == newItem.charactter.name &&
                     oldItem.charactter.isMain == newItem.charactter.isMain &&
-                    oldItem.charactter.id == newItem.charactter.id
+                    oldItem.charactter.id == newItem.charactter.id && hasSameFoundContent(oldItem, newItem)
         }
     }
     ){
