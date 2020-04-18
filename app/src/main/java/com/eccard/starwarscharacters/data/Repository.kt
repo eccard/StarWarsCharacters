@@ -8,7 +8,9 @@ import com.eccard.starwarscharacters.data.api.FilmRespose
 import com.eccard.starwarscharacters.data.api.StarWarsApi
 import com.eccard.starwarscharacters.data.db.CharactterDao
 import com.eccard.starwarscharacters.data.db.FilmDao
+import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Charactter
+import com.eccard.starwarscharacters.data.model.Film
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,9 +25,9 @@ class Repository @Inject constructor(
     private val charactterDao: CharactterDao,
     private val filmDao : FilmDao) {
 
-    private val result = MediatorLiveData<List<Charactter>>()
+    private val result = MediatorLiveData<List<CharacterAdapterPojo>>()
 
-    fun asLiveData() = result as LiveData<List<Charactter>>
+    fun asLiveData() = result as LiveData<List<CharacterAdapterPojo>>
 
     fun loadCharactersFromApi(){
        starWarsApi.getCaracters().enqueue(object : Callback<CharactterResponse?> {
@@ -41,7 +43,7 @@ class Repository @Inject constructor(
 
                     appExecutors.diskIO().execute {
                         charactterDao.insert(it.items)
-                        result.postValue(charactterDao.getAllCharactters())
+                        result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
                     }
 
 
@@ -74,15 +76,15 @@ class Repository @Inject constructor(
 
     fun loadAllCharacttersFromDb(){
         appExecutors.diskIO().execute{
-            result.postValue(charactterDao.getAllCharactters())
+            result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
         }
     }
 
-    fun findByNameOrFilm(query : String) : LiveData<List<Charactter>>{
+    fun findByNameOrFilm(query : String) : LiveData<List<CharacterAdapterPojo>>{
 
         appExecutors.diskIO().execute {
             if ( query.isBlank()){
-                result.postValue(charactterDao.getAllCharactters())
+                result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
             } else {
                 val characttersFilteredByName = charactterDao.getCharacttersWithName(query)
 
@@ -102,13 +104,16 @@ class Repository @Inject constructor(
                     charactesrInFilms.remove(character.id)
                 }
 
-                val idList = charactesrInFilms.toList()
+                val charactersInFilms = charactterDao.getCharacttersByIds(charactesrInFilms.toList())
 
-                val charactersInFilms = charactterDao.getCharacttersByIds(idList)
 
-                val mutableList = mutableListOf<Charactter>()
-                mutableList.addAll(characttersFilteredByName)
-                mutableList.addAll(charactersInFilms)
+                val mutableListAdapter = characttersFilteredByName.map { CharacterAdapterPojo(it,null) }
+
+                val characterInFilmsPojo = search(films,charactersInFilms)
+
+                val mutableList = mutableListOf<CharacterAdapterPojo>()
+                mutableList.addAll(mutableListAdapter)
+                mutableList.addAll(characterInFilmsPojo)
 
                 result.postValue(mutableList)
             }
@@ -117,4 +122,23 @@ class Repository @Inject constructor(
         return asLiveData()
     }
 
+    private fun search(films : List<Film>, charactersInFilms  : List<Charactter>) : List<CharacterAdapterPojo> {
+        val list = mutableListOf<CharacterAdapterPojo>()
+
+        for ( chars in charactersInFilms){
+            val sBuffer = StringBuffer()
+
+            for (film in films){
+                film.charactersIds?.let {
+                        if (it.contains(chars.id)){
+                            sBuffer.append(film.name)
+                            sBuffer.append(", ")
+                    }
+                }
+            }
+            list.add(CharacterAdapterPojo(chars, sBuffer.toString()))
+        }
+
+        return list
+    }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
+import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.util.AbsentLiveData
 import java.util.*
@@ -42,7 +43,7 @@ class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(
 //        _query.switchMap {  }
 //    }
 
-    val results : LiveData<List<Charactter>> = _query.switchMap {
+    val results : LiveData<List<CharacterAdapterPojo>> = _query.switchMap {
             query -> repository.findByNameOrFilm(query)
     }
 //    val results : LiveData<List<Charactter>> = repository.asLiveData()

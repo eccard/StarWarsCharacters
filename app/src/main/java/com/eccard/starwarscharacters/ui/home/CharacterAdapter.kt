@@ -6,22 +6,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.data.model.Charactter
+import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.databinding.CharacterItemBinding
 import com.eccard.starwarscharacters.ui.common.DataBoundListAdapter
 
 class CharacterAdapter (appExecutors: AppExecutors,
-                        private val characterClickCallback: ((Charactter) -> Unit)?) :
-    DataBoundListAdapter<Charactter,CharacterItemBinding> (appExecutors = appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<Charactter>(){
-        override fun areItemsTheSame(oldItem: Charactter, newItem: Charactter): Boolean {
-            return oldItem.id == newItem.id
+                        private val characterClickCallback: ((CharacterAdapterPojo) -> Unit)?) :
+    DataBoundListAdapter<CharacterAdapterPojo,CharacterItemBinding> (appExecutors = appExecutors,
+    diffCallback = object : DiffUtil.ItemCallback<CharacterAdapterPojo>(){
+        override fun areItemsTheSame(oldItem: CharacterAdapterPojo, newItem: CharacterAdapterPojo): Boolean {
+            return oldItem.charactter.id == newItem.charactter.id
         }
 
-        override fun areContentsTheSame(oldItem: Charactter, newItem: Charactter): Boolean {
-            return oldItem.name == newItem.name &&
-                    oldItem.isMain == newItem.isMain &&
-                    oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: CharacterAdapterPojo, newItem: CharacterAdapterPojo): Boolean {
+            return oldItem.charactter.name == newItem.charactter.name &&
+                    oldItem.charactter.isMain == newItem.charactter.isMain &&
+                    oldItem.charactter.id == newItem.charactter.id
         }
     }
     ){
@@ -34,14 +34,14 @@ class CharacterAdapter (appExecutors: AppExecutors,
             false
         )
         binding.root.setOnClickListener{
-            binding.character?.let {
+            binding.charPojo?.let {
                 characterClickCallback?.invoke(it)
             }
         }
         return binding
     }
 
-    override fun bind(binding: CharacterItemBinding, item: Charactter) {
-        binding.character = item
+    override fun bind(binding: CharacterItemBinding, item: CharacterAdapterPojo) {
+        binding.charPojo = item
     }
 }
