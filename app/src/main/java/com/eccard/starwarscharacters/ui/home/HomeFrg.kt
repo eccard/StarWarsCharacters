@@ -3,6 +3,8 @@ package com.eccard.starwarscharacters.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.os.IBinder
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +21,6 @@ import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
 import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
-import kotlinx.android.synthetic.main.home_frg.view.*
 import javax.inject.Inject
 
 class HomeFrg : Fragment(), Injectable {
@@ -97,6 +98,19 @@ class HomeFrg : Fragment(), Injectable {
 
     // todo se for ficar abaixo com action up não precisa dessesky
     private fun initSearchInputListener() {
+
+        binding.input.addTextChangedListener(object :TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                doSearch(binding.input,false)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
         binding.input.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 doSearch(view)
@@ -118,10 +132,13 @@ class HomeFrg : Fragment(), Injectable {
     }
 
 
-    private fun doSearch(v: View) {
+    private fun doSearch(v: View, isToDissmissKeyboard :Boolean = true) {
         val query = binding.input.text.toString()
-        // Dismiss keyboard
-        dismissKeyboard(v.windowToken)
+
+        if (isToDissmissKeyboard){
+            // Dismiss keyboard
+            dismissKeyboard(v.windowToken)
+        }
         homeViewModel.setQuery(query)
     }
 
