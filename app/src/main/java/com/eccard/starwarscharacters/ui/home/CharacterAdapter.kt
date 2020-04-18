@@ -15,7 +15,7 @@ class CharacterAdapter (appExecutors: AppExecutors,
     DataBoundListAdapter<CharacterAdapterPojo,CharacterItemBinding> (appExecutors = appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<CharacterAdapterPojo>(){
         override fun areItemsTheSame(oldItem: CharacterAdapterPojo, newItem: CharacterAdapterPojo): Boolean {
-            return oldItem.charactter.id == newItem.charactter.id
+            return oldItem.charactter.id == newItem.charactter.id && hasSameFoundContent(oldItem, newItem)
         }
 
         private fun hasSameFoundContent(

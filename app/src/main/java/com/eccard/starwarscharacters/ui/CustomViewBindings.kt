@@ -2,6 +2,7 @@ package com.eccard.starwarscharacters.ui
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import coil.api.load
 import coil.transform.CircleCropTransformation
@@ -30,5 +31,25 @@ object CustomViewBindings {
         } else {
             view.load(placeHolder)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["isMain","foundFilms"])
+    fun itemListCharacter(tv: TextView, isMain : Boolean, foundFilms : String?) {
+
+        val sBuffer = StringBuffer()
+        if (isMain){
+            sBuffer.append("Is main character")
+        } else {
+            sBuffer.append("Isn't main character")
+        }
+
+        foundFilms?.let{
+            if (!it.isBlank()){
+                sBuffer.append(". From: ")
+                sBuffer.append(foundFilms)
+            }
+        }
+        tv.text = sBuffer.toString()
     }
 }
