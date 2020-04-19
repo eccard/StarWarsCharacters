@@ -750,66 +750,105 @@ const val getFilms = """
     "items": [
       {
         "id": 0,
-        "name" : "Uma Nova Esperança",
-        "complete_name": "Star Wars: Episódio IV - Uma Nova Esperança",
+        "name" : "A New Hope",
+        "complete_name": "Star Wars: Episode IV - A New Hope (1977)",
         "date": "25 de maio de 1977",
-        "character_ids": [4,10,5,55,3,8,7,11,0]
+        "character_ids": [4,10,5,55,3,8,7,11,0],
+        "synopsis" : "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+        "director" : "George Lucas",
+        "cover_album" : "https://www.imdb.com/title/tt0076759/mediaviewer/rm3263717120",
+        "trailer" : "https://www.youtube.com/watch?v=1g3_CFmnU7k"
+
+
       },
       {
         "id": 1,
-        "name" : "O Império Contra-Ataca",
-        "complete_name": "Star Wars: Episódio V - O Império Contra-Ataca",
+        "name" : "The Empire Strikes Back",
+        "complete_name": "Star Wars: Episode V - The Empire Strikes Back (1980)",
         "date": "21 de maio de 1980",
-        "character_ids": [4,10,5,8,0,11,7,6,3,20,63]
+        "character_ids": [4,10,5,8,0,11,7,6,3,20,63],
+        "synopsis" : "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader and a bounty hunter named Boba Fett all over the galaxy.",
+        "director": "Irvin Kershner",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,641,1000_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=JNwNXF9Y6kY"
+
       },
       {
         "id": 2,
-        "name" : "O Retorno de Jedi",
-        "complete_name": "Star Wars: Episódio VI - O Retorno de Jedi",
+        "name" : "Return of the Jedi",
+        "complete_name": "Star Wars: Episode VI - Return of the Jedi (1983)",
         "date": "25 de maio de 1983 ",
-        "character_ids": [4,10,5,18,8,11,0,6,3,7,38,65,90,20]
+        "character_ids": [4,10,5,18,8,11,0,6,3,7,38,65,90,20],
+        "synopsis" : "After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor's trap.",
+        "director": "Richard Marquand",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BOWZlMjFiYzgtMTUzNC00Y2IzLTk1NTMtZmNhMTczNTk0ODk1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SY999_CR0,0,644,999_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=5UfA_aKBGMc"
       },
       {
         "id": 3,
-        "name" : "A Ameaça Fantasma",
-        "complete_name": "Star Wars: Episódio I - A Ameaça Fantasma",
+        "name" : "The Phantom Menace",
+        "complete_name": "Star Wars: Episode I - The Phantom Menace (1999)",
         "date": "19 de maio de 1999",
-        "character_ids": [0]
+        "character_ids": [0],
+        "synopsis" : "Two Jedi escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.",
+        "director": "George Lucas",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BYTRhNjcwNWQtMGJmMi00NmQyLWE2YzItODVmMTdjNWI0ZDA2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SY999_SX666_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=UihVSUYYDTQ"
       },
       {
         "id": 4,
-        "name" : "Ataque dos Clones",
-        "complete_name": "Star Wars: Episódio II - Ataque dos Clones",
+        "name" : "Attack of the Clones",
+        "complete_name": "Star Wars: Episode II - Attack of the Clones (2002)",
         "date": "16 de maio de 2002",
-        "character_ids": [0]
+        "character_ids": [0],
+        "synopsis" : "Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé Amidala, while Obi-Wan Kenobi investigates an assassination attempt on the senator and discovers a secret clone army crafted for the Jedi.",
+        "director": "George Lucas",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BMDAzM2M0Y2UtZjRmZi00MzVlLTg4MjEtOTE3NzU5ZDVlMTU5XkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_SY999_CR0,0,659,999_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=gYbW1F_c9eM"
       },
       {
         "id": 5,
-        "name" : "A Vingança dos Sith",
-        "complete_name": "Star Wars: Episódio III - A Vingança dos Sith",
+        "name" : "Revenge of the Sith",
+        "complete_name": "Star Wars: Episode III - Revenge of the Sith (2005)",
         "date": "19 de maio de 2005",
-        "character_ids": [0]
+        "character_ids": [0],
+        "synopsis" : "Three years into the Clone Wars, the Jedi rescue Palpatine from Count Dooku. As Obi-Wan pursues a new threat, Anakin acts as a double agent between the Jedi Council and Palpatine and is lured into a sinister plan to rule the galaxy.",
+        "director": "George Lucas",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BNTc4MTc3NTQ5OF5BMl5BanBnXkFtZTcwOTg0NjI4NA@@._V1_SY1000_SX750_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=5UnjrG_N8hU"
       },
       {
         "id": 6,
-        "name" : "O Despertar da Força",
-        "complete_name": "Star Wars: Episódio VII - O Despertar da Força",
+        "name" : "The Force Awakens",
+        "complete_name": "Star Wars: Episode VII - The Force Awakens (2015)",
         "date": "18 de dezembro de 2015",
-        "character_ids": [0]
+        "character_ids": [0],
+        "synopsis" : "Three decades after the Empire's defeat, a new threat arises in the militant First Order. Defected stormtrooper Finn and the scavenger Rey are caught up in the Resistance's search for the missing Luke Skywalker.",
+        "director": "J.J. Abrams",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SY1000_CR0,0,677,1000_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=sGbxmsDFVnE"
       },
       {
         "id": 7,
-        "name" : "Os Últimos Jedi",
-        "complete_name": "Star Wars: Episódio VIII - Os Últimos Jedi",
+        "name" : "The Last Jedi",
+        "complete_name": "Star Wars: Episode VIII - The Last Jedi (2017)",
         "date": "14 de dezembro de 2017",
-        "character_ids": [0]
+        "character_ids": [0],
+        "synopsis" : " Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.",
+        "director": "Rian Johnson",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BMjQ1MzcxNjg4N15BMl5BanBnXkFtZTgwNzgwMjY4MzI@._V1_SY1000_CR0,0,675,1000_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=Q0CbN8sfihY"
       },
       {
         "id": 8,
-        "name" : "A Ascensão Skywalker",
-        "complete_name": "Star Wars: Episódio IX - A Ascensão Skywalker",
-        "date": "19 de dezembro de 2019 ",
-        "character_ids": [0]
+        "name" : "The Rise of Skywalker",
+        "complete_name": "Star Wars: Episode IX - The Rise of Skywalker (2019)",
+        "date": "19 de dezembro de 2019",
+        "character_ids": [0],
+        "synopsis" : "The surviving members of the resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak bringing the Skywalker saga to its end.",
+        "director": "J.J. Abrams",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BMDljNTQ5ODItZmQwMy00M2ExLTljOTQtZTVjNGE2NTg0NGIxXkEyXkFqcGdeQXVyODkzNTgxMDg@._V1_SY1000_CR0,0,675,1000_AL_.jpg",
+        "trailer" : "https://www.youtube.com/watch?v=8Qn_spdM5Zg"
       }
     ]
   }

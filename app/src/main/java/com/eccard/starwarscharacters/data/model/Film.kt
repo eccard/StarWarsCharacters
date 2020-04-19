@@ -24,6 +24,19 @@ data class Film (
 
 
     @field:SerializedName("character_ids")
-    val charactersIds : List<Int>?
+    val charactersIds : List<Int>?,
+
+    @field:SerializedName("synopsis")
+    val synopsis : String,
+
+
+    @field:SerializedName("director")
+    val director : String,
+
+    @field:SerializedName("trailer")
+    val trailer : String,
+
+    @field:SerializedName("cover_album")
+    val coverAlbum : String
 
 )
