@@ -2,4 +2,6 @@
 <resources>
     <dimen name="divider_margin_start">72dp</dimen>
     <dimen name="divider_margin_end">8dp</dimen>
+    <dimen name="img_view_character_detail_width">185dp</dimen>
+    <dimen name="img_view_character_detail_height">275dp</dimen>
 </resources>

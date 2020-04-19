@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.eccard.starwarscharacters.R
+import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.databinding.ActivityMainBinding
 import com.eccard.starwarscharacters.databinding.HomeFrgBinding
+import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrg
 import com.eccard.starwarscharacters.ui.home.HomeFrg
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -24,10 +26,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_content, HomeFrg())
+            .add(R.id.main_content, HomeFrg(),HomeFrg.TAG)
+            .addToBackStack(HomeFrg.TAG)
             .commit()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
+    fun nativateToDetailsFrg(charactter: Charactter){
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_content, CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
+            .addToBackStack(CharacterDetailFrg.TAG)
+            .commit()
+    }
 }

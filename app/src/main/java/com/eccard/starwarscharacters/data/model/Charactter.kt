@@ -1,11 +1,14 @@
 package com.eccard.starwarscharacters.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     primaryKeys = ["id"]
 )
+@Parcelize
 data class Charactter(
     @field:SerializedName("id")
     val id : Int,
@@ -21,5 +24,5 @@ data class Charactter(
     val firstAppearance : String?,
     @field:SerializedName("last_appearance")
     val lastAppearance : String?
-)
+) : Parcelable
 

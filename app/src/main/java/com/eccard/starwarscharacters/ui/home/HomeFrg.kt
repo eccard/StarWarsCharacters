@@ -20,10 +20,15 @@ import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
+import com.eccard.starwarscharacters.ui.MainActivity
 import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
 import javax.inject.Inject
 
 class HomeFrg : Fragment(), Injectable {
+
+    companion object {
+        val TAG = "HomeFrg"//::class.simpleName
+    }
 
 
     @Inject
@@ -51,19 +56,16 @@ class HomeFrg : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
         initRecyclerView()
         initSearchInputListener()
 
         homeViewModel.loadCharacter()
-        super.onViewCreated(view, savedInstanceState)
     }
-
 
     private fun initRecyclerView() {
 
         val rvAdapter = CharacterAdapter(appExecutors = appExecutors){
-//            character ->
+            character -> (activity as MainActivity).nativateToDetailsFrg(character.charactter)
         }
 
         android.R.layout.simple_list_item_1
