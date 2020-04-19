@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun nativateToDetailsFrg(charactter: Charactter){
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_content, CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
+            .replace(R.id.main_content, CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
             .addToBackStack(CharacterDetailFrg.TAG)
             .commit()
     }
