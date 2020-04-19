@@ -19,8 +19,8 @@ data class Film (
     @field:SerializedName("complete_name")
     val completeName : String,
 
-    @field:SerializedName("date")
-    val date : String,
+    @field:SerializedName("launch_date")
+    val launchDate : String,
 
 
     @field:SerializedName("character_ids")
