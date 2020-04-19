@@ -14,6 +14,12 @@ data class Charactter(
     @field:SerializedName("name")
     val name : String,
     @field:SerializedName("image_url")
-    val imageUrl : String
+    val imageUrl : String,
+    @field:SerializedName("gender")
+    val gender : String,
+    @field:SerializedName("first_appearance")
+    val firstAppearance : String?,
+    @field:SerializedName("last_appearance")
+    val lastAppearance : String?
 )
 
