@@ -763,7 +763,7 @@ const val getFilms = """
         "character_ids": [4,10,5,55,3,8,7,11,0],
         "synopsis" : "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
         "director" : "George Lucas",
-        "cover_album" : "https://www.imdb.com/title/tt0076759/mediaviewer/rm3263717120",
+        "cover_album" : "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,643,1000_AL_.jpg",
         "trailer" : "https://www.youtube.com/watch?v=1g3_CFmnU7k"
 
 
