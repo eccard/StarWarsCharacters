@@ -1,14 +1,17 @@
 package com.eccard.starwarscharacters.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.eccard.starwarscharacters.util.IntListTypeConverter
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     primaryKeys = ["id"]
 )
+@Parcelize
 data class Film (
     @SerializedName("id")
     val id : Int = 0,
@@ -39,4 +42,4 @@ data class Film (
     @field:SerializedName("cover_album")
     val coverAlbum : String
 
-)
+) : Parcelable
