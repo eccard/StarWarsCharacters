@@ -59,13 +59,12 @@ class HomeFrg : Fragment(), Injectable {
         initRecyclerView()
         initSearchInputListener()
 
-        homeViewModel.loadCharacter()
     }
 
     private fun initRecyclerView() {
 
         val rvAdapter = CharacterAdapter(appExecutors = appExecutors){
-            character -> (activity as MainActivity).nativateToDetailsFrg(character.charactter)
+            character -> (activity as MainActivity).navigateToDetailsFrg(character.charactter)
         }
 
         android.R.layout.simple_list_item_1

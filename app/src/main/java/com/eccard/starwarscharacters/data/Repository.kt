@@ -26,10 +26,12 @@ class Repository @Inject constructor(
     private val filmDao : FilmDao) {
 
     private val result = MediatorLiveData<List<CharacterAdapterPojo>>()
+    private val isSyncyngWithAPI = MediatorLiveData<Boolean>()
 
     fun asLiveData() = result as LiveData<List<CharacterAdapterPojo>>
 
-    fun loadCharactersFromApi(){
+    fun syncWithApi() : LiveData<Boolean> {
+       isSyncyngWithAPI.postValue(true)
        starWarsApi.getCaracters().enqueue(object : Callback<CharactterResponse?> {
             override fun onFailure(call: Call<CharactterResponse?>, t: Throwable) {
                 Timber.e(t)
@@ -40,25 +42,20 @@ class Repository @Inject constructor(
                 response: Response<CharactterResponse?>
             ) {
                 response.body()?.let {
-
+                    loadFilmlFromApi()
                     appExecutors.diskIO().execute {
                         charactterDao.insert(it.items)
                         result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
                     }
 
-
-                    Timber.d("onResponse ${it.toString()}")
-//                    result.value = it.items
-
-                    // todo save in db
                 }
             }
         })
 
-        loadFilmlFromApi()
+        return isSyncyngWithAPI
     }
 
-    fun loadFilmlFromApi(){
+    private fun loadFilmlFromApi(){
         starWarsApi.getFilms().enqueue(object : Callback<FilmRespose?> {
             override fun onFailure(call: Call<FilmRespose?>, t: Throwable) {
                 Timber.e(t)
@@ -66,6 +63,7 @@ class Repository @Inject constructor(
 
             override fun onResponse(call: Call<FilmRespose?>, response: Response<FilmRespose?>) {
                 response.body()?.let {
+                    isSyncyngWithAPI.postValue(false)
                     appExecutors.diskIO().execute {
                         filmDao.insert(it.items)
                     }
@@ -141,4 +139,5 @@ class Repository @Inject constructor(
 
         return list
     }
+
 }

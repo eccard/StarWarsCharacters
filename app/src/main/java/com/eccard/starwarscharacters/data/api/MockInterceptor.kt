@@ -10,6 +10,9 @@ import okhttp3.MediaType
 import timber.log.Timber
 
 class MockInterceptor : Interceptor {
+    companion object {
+        const val simulateNetTime = 300
+    }
     override fun intercept(chain: Interceptor.Chain): Response {
 //        as the api isn't workin, this will for debug and Release
         val uri = chain.request().url().uri().toString()
@@ -22,6 +25,10 @@ class MockInterceptor : Interceptor {
         } else {
             ""
         }
+
+	Timber.d("simulating internet delay init")
+        Thread.sleep(simulateNetTime.toLong())
+	Timber.d("simulating internet delay end")
 
         return Response.Builder()
             .request(chain.request())

@@ -2,12 +2,14 @@ package com.eccard.starwarscharacters.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.databinding.ActivityMainBinding
-import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrg
 import com.eccard.starwarscharacters.ui.home.HomeFrg
 import dagger.android.DispatchingAndroidInjector
@@ -21,19 +23,40 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
+
+    val viewModel: MainViewModel by viewModels {
+        viewModelFactory
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+
+        viewModel.loading.observe(this@MainActivity, Observer {
+            loading ->
+            loading?.let {
+                binding.loading = loading
+                binding.executePendingBindings()
+                if (!loading) {
+                    navigateToHome()
+                }
+            }
+        })
+
+    }
+
+    private fun navigateToHome() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_content, HomeFrg(),HomeFrg.TAG)
-            .addToBackStack(HomeFrg.TAG)
+            .add(R.id.main_content, HomeFrg(), HomeFrg.TAG)
             .commit()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    fun nativateToDetailsFrg(charactter: Charactter){
+    fun navigateToDetailsFrg(charactter: Charactter){
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_content, CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
             .addToBackStack(CharacterDetailFrg.TAG)

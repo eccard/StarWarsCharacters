@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
-import com.eccard.starwarscharacters.data.model.Charactter
-import com.eccard.starwarscharacters.util.AbsentLiveData
 import java.util.*
 import javax.inject.Inject
 
@@ -58,9 +56,6 @@ class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(
         _query.value = input
     }
 
-    fun loadCharacter(){
-        repository.loadCharactersFromApi()
-    }
 
     fun loadFromApiWithName(name : String){
 //        repository.
