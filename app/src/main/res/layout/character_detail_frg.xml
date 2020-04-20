@@ -21,7 +21,7 @@
             android:layout_height="@dimen/img_view_character_detail_height"
             android:layout_gravity="center_horizontal"
             tools:src="@mipmap/ic_launcher"
-            app:showImage="@{character.imageUrl}"
+            app:showImageRec="@{character.imageUrl}"
             app:name="@{character.name}"
             android:contentDescription="@string/character_image"/>
 

@@ -21,12 +21,35 @@ object CustomViewBindings {
     @JvmStatic
     @BindingAdapter(value = ["showImage","name"])
     fun showImage(view: ImageView, url : String, name : String) {
-        val placeHolder = AvatarGenerator.avatarImage(view.context,200,AvatarConstants.CIRCLE,name)
-        if (!url.isBlank()){
+        setImage(false, view, name, url)
+    }
+
+
+    @JvmStatic
+    @BindingAdapter(value = ["showImageRec","name"])
+    fun showImageRec(view: ImageView, url : String, name : String) {
+        setImage(true, view, name, url)
+    }
+
+    private fun setImage(
+        isRectangle: Boolean,
+        view: ImageView,
+        name: String,
+        url: String
+    ) {
+        val type = if (isRectangle) {
+            AvatarConstants.RECTANGLE
+        } else {
+            AvatarConstants.CIRCLE
+        }
+        val placeHolder = AvatarGenerator.avatarImage(view.context, 200, type, name)
+        if (!url.isBlank()) {
             view.load(url) {
-             crossfade(true)
-             placeholder(placeHolder)
-             transformations(CircleCropTransformation())
+                crossfade(true)
+                placeholder(placeHolder)
+                if (!isRectangle) {
+                    transformations(CircleCropTransformation())
+                }
             }
         } else {
             view.load(placeHolder)
