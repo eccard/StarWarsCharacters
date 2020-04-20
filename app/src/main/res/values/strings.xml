@@ -8,4 +8,6 @@
     <string name="first_appearance">First appearance :</string>
     <string name="last_appearance">Last appearance :</string>
     <string name="is_main">Is main :</string>
+    <string name="films">Films</string>
+    <string name="film_item_poster">Film poster</string>
 </resources>

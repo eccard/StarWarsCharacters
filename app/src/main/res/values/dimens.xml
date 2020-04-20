@@ -4,4 +4,8 @@
     <dimen name="divider_margin_end">8dp</dimen>
     <dimen name="img_view_character_detail_width">185dp</dimen>
     <dimen name="img_view_character_detail_height">275dp</dimen>
+
+    <dimen name="img_view_film_width">185dp</dimen>
+    <dimen name="img_view_film_height">275dp</dimen>
+    <dimen name="grid_spacing_small">0.5dp</dimen>
 </resources>
