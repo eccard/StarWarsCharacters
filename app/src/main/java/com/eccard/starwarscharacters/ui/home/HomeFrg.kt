@@ -27,7 +27,7 @@ import javax.inject.Inject
 class HomeFrg : Fragment(), Injectable {
 
     companion object {
-        val TAG = "HomeFrg"//::class.simpleName
+        val TAG = HomeFrg::class.simpleName
     }
 
 

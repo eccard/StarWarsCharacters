@@ -17,7 +17,7 @@ import javax.inject.Inject
 class CharacterDetailFrg : Fragment(), Injectable {
 
     companion object {
-        val TAG = "CharacterDetailFrg"//::class.simpleName
+        val TAG = CharacterDetailFrg::class.simpleName
 
         const val CHARACTER_KEY = "characterKey"
         fun newInstance ( character : Charactter) : CharacterDetailFrg  {

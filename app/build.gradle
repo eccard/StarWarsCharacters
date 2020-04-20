@@ -52,6 +52,7 @@ dependencies {
 
 
     implementation deps.kotlin.stdlib
+    implementation deps.kotlin.reflect
     implementation deps.app_compat
     implementation deps.recyclerview
     implementation deps.cardview
