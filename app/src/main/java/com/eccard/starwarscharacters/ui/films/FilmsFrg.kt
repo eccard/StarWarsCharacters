@@ -66,12 +66,12 @@ class FilmsFrg: Fragment(), Injectable {
         display.getMetrics(outMetrics)
         val screenWidth = outMetrics.widthPixels.toFloat()
         val bestSpanCount = (screenWidth / posterWidth).roundToInt()
-//        binding.rvFilms.setHasFixedSize(true)
+        binding.rvFilms.setHasFixedSize(true)
         val layoutManager = GridLayoutManager(binding.rvFilms.context,bestSpanCount)
         binding.rvFilms.layoutManager = layoutManager
 
         val rvAdapter = FilmsAdapter(appExecutors = appExecutors){
-                //films -> (activity as MainActivity).navigateToDetailsFrg(character.charactter)
+                film -> (activity as MainActivity).navigateToFilmDetailFrg(film)
         }
         adapter = rvAdapter
         binding.rvFilms.adapter = adapter

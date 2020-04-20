@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="film"
+            type="com.eccard.starwarscharacters.data.model.Film" />
+    </data>
+
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.moviedetail.MovieDetailActivity"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_view_detail_activity"
+            android:layout_width="@dimen/img_view_film_width"
+            android:layout_height="@dimen/img_view_film_height"
+            android:layout_gravity="center_horizontal"
+            tools:src="@mipmap/ic_launcher"
+            app:showImageRec="@{film.coverAlbum}"
+            app:name="@{film.name}"
+            android:contentDescription="@string/film_item_poster"/>
+
+    </LinearLayout>
+
+</layout>

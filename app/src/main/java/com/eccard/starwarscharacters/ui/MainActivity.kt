@@ -15,6 +15,7 @@ import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.databinding.ActivityMainBinding
 import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrg
 import com.eccard.starwarscharacters.ui.films.FilmsFrg
+import com.eccard.starwarscharacters.ui.flimdetail.FilmDetailFrg
 import com.eccard.starwarscharacters.ui.home.HomeFrg
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -62,6 +63,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun navigateToDetailsFrg(charactter: Charactter){
         navigateToFrg(CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
+    }
+
+    fun navigateToFilmDetailFrg(film: Film){
+        navigateToFrg(FilmDetailFrg.newInstance(film),FilmDetailFrg.TAG)
     }
 
     fun navigateToFilmFrg(){
