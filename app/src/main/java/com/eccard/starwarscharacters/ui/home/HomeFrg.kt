@@ -30,7 +30,6 @@ class HomeFrg : Fragment(), Injectable {
         val TAG = HomeFrg::class.simpleName
     }
 
-
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 
@@ -78,22 +77,6 @@ class HomeFrg : Fragment(), Injectable {
         })
 
         homeViewModel.setQuery("")
-//        binding.searchResult = searchViewModel.results
-//        searchViewModel.results.observe(viewLifecycleOwner, Observer { result ->
-//            adapter.submitList(result?.data)
-//        })
-//
-//        searchViewModel.loadMoreStatus.observe(viewLifecycleOwner, Observer { loadingMore ->
-//            if (loadingMore == null) {
-//                binding.loadingMore = false
-//            } else {
-//                binding.loadingMore = loadingMore.isRunning
-//                val error = loadingMore.errorMessageIfNotHandled
-//                if (error != null) {
-//                    Snackbar.make(binding.loadMoreBar, error, Snackbar.LENGTH_LONG).show()
-//                }
-//            }
-//        })
     }
 
 

@@ -44,24 +44,13 @@ class CharacterDetailFrg : Fragment(), Injectable {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.character_detail_frg,container,false)
-
-        arguments?.let {
-            val character = it.getParcelable<Charactter>(CHARACTER_KEY)
-            binding.character = character
-//            binding.executePendingBindings()
-        }
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-//        savedInstanceState?.let {
-//            val character = it.getParcelable<Charactter>(CHARACTER_KEY)
-//            binding.character = character
-//        }
-
-
+        arguments?.let {
+            val character = it.getParcelable<Charactter>(CHARACTER_KEY)
+            binding.character = character
+        }
     }
 }
