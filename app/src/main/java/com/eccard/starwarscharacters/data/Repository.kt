@@ -25,10 +25,13 @@ class Repository @Inject constructor(
     private val charactterDao: CharactterDao,
     private val filmDao : FilmDao) {
 
-    private val result = MediatorLiveData<List<CharacterAdapterPojo>>()
+    private val charactersResult = MediatorLiveData<List<CharacterAdapterPojo>>()
+    private val filmResult = MediatorLiveData<List<Film>>()
     private val isSyncyngWithAPI = MediatorLiveData<Boolean>()
 
-    fun asLiveData() = result as LiveData<List<CharacterAdapterPojo>>
+    fun charactersAsLiveData() = charactersResult as LiveData<List<CharacterAdapterPojo>>
+    fun filmAsLiveData() = filmResult as LiveData<List<Film>>
+
 
     fun syncWithApi() : LiveData<Boolean> {
        isSyncyngWithAPI.postValue(true)
@@ -45,7 +48,7 @@ class Repository @Inject constructor(
                     loadFilmlFromApi()
                     appExecutors.diskIO().execute {
                         charactterDao.insert(it.items)
-                        result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
+                        charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
                     }
 
                 }
@@ -74,7 +77,7 @@ class Repository @Inject constructor(
 
     fun loadAllCharacttersFromDb(){
         appExecutors.diskIO().execute{
-            result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
+            charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
         }
     }
 
@@ -82,7 +85,7 @@ class Repository @Inject constructor(
 
         appExecutors.diskIO().execute {
             if ( query.isBlank()){
-                result.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
+                charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
             } else {
                 val characttersFilteredByName = charactterDao.getCharacttersWithName(query)
 
@@ -113,11 +116,11 @@ class Repository @Inject constructor(
                 mutableList.addAll(mutableListAdapter)
                 mutableList.addAll(characterInFilmsPojo)
 
-                result.postValue(mutableList)
+                charactersResult.postValue(mutableList)
             }
         }
 
-        return asLiveData()
+        return charactersAsLiveData()
     }
 
     private fun search(films : List<Film>, charactersInFilms  : List<Charactter>) : List<CharacterAdapterPojo> {
@@ -138,6 +141,15 @@ class Repository @Inject constructor(
         }
 
         return list
+    }
+
+    fun loadAllFilms() : LiveData<List<Film>> {
+        appExecutors.diskIO().execute {
+            filmResult.postValue(filmDao.getAllFilms())
+
+        }
+
+        return filmAsLiveData()
     }
 
 }
