@@ -2,6 +2,8 @@ package com.eccard.starwarscharacters.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -9,8 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Charactter
+import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.databinding.ActivityMainBinding
 import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrg
+import com.eccard.starwarscharacters.ui.films.FilmsFrg
 import com.eccard.starwarscharacters.ui.home.HomeFrg
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -57,9 +61,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     fun navigateToDetailsFrg(charactter: Charactter){
+        navigateToFrg(CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
+    }
+
+    fun navigateToFilmFrg(){
+        navigateToFrg(FilmsFrg(),FilmsFrg.TAG)
+    }
+
+    private fun navigateToFrg(fragment : Fragment, tag : String?){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, CharacterDetailFrg.newInstance(charactter),CharacterDetailFrg.TAG)
-            .addToBackStack(CharacterDetailFrg.TAG)
+            .replace(R.id.main_content, fragment,tag)
+            .addToBackStack(tag)
             .commit()
     }
+
+
 }

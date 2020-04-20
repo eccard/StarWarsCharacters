@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
@@ -44,6 +41,11 @@ class HomeFrg : Fragment(), Injectable {
         viewModelFactory
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,13 +62,26 @@ class HomeFrg : Fragment(), Injectable {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_films -> {
+                (activity as MainActivity).navigateToFilmFrg()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun initRecyclerView() {
 
         val rvAdapter = CharacterAdapter(appExecutors = appExecutors){
             character -> (activity as MainActivity).navigateToDetailsFrg(character.charactter)
         }
 
-        android.R.layout.simple_list_item_1
         binding.query = homeViewModel.query
         binding.characterList.adapter = rvAdapter
         adapter = rvAdapter
