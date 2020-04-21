@@ -45,7 +45,7 @@ object CustomViewBindings {
         val placeHolder = AvatarGenerator.avatarImage(view.context, 200, type, name)
         if (!url.isBlank()) {
             view.load(url) {
-                crossfade(true)
+                crossfade(400)
                 placeholder(placeHolder)
                 if (!isRectangle) {
                     transformations(CircleCropTransformation())
