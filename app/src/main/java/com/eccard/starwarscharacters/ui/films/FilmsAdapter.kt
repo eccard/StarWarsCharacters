@@ -1,7 +1,5 @@
 package com.eccard.starwarscharacters.ui.films
 
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
