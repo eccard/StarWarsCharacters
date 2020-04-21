@@ -37,7 +37,7 @@ class HomeFrg : Fragment(), Injectable {
 
     private lateinit var adapter: CharacterAdapter
 
-    val homeViewModel: HomeViewModel by viewModels {
+    val viewModel: HomeViewModel by viewModels {
         viewModelFactory
     }
 
@@ -58,7 +58,7 @@ class HomeFrg : Fragment(), Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initRecyclerView()
         initSearchInputListener()
-        homeViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
+        viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
             loading?.let {
                 binding.loading = loading
             }
@@ -85,12 +85,12 @@ class HomeFrg : Fragment(), Injectable {
             character -> (activity as MainActivity).navigateToDetailsFrg(character.charactter)
         }
 
-        binding.query = homeViewModel.query
+        binding.query = viewModel.query
         binding.characterList.adapter = rvAdapter
         adapter = rvAdapter
 
         binding.characterList.addItemDecoration(SimpleDividerItemDecoration(binding.characterList.context))
-        homeViewModel.results.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.results.observe(viewLifecycleOwner, Observer { result ->
             adapter.submitList(result)
         })
     }
@@ -139,7 +139,7 @@ class HomeFrg : Fragment(), Injectable {
             // Dismiss keyboard
             dismissKeyboard(v.windowToken)
         }
-        homeViewModel.setQuery(query)
+        viewModel.setQuery(query)
     }
 
     private fun dismissKeyboard(windowToken: IBinder) {
