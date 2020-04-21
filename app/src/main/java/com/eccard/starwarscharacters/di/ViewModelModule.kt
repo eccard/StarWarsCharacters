@@ -16,6 +16,7 @@ import javax.inject.Singleton
 abstract class ViewModelModule {
     @Binds
     @IntoMap
+    @Singleton
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
 
@@ -23,12 +24,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CharacterDetailViewModel::class)
     abstract fun bindCharacterViewModel(viewModel: CharacterDetailViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    @Singleton
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap

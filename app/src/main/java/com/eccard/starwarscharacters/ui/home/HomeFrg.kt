@@ -56,10 +56,13 @@ class HomeFrg : Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         initRecyclerView()
         initSearchInputListener()
-
+        homeViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+                binding.loading = loading
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -90,13 +93,6 @@ class HomeFrg : Fragment(), Injectable {
         homeViewModel.results.observe(viewLifecycleOwner, Observer { result ->
             adapter.submitList(result)
         })
-
-        homeViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
-            loading?.let {
-                binding.loading = loading
-            }
-        })
-
     }
 
 
