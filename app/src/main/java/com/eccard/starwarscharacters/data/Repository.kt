@@ -27,14 +27,19 @@ class Repository @Inject constructor(
 
     private val charactersResult = MediatorLiveData<List<CharacterAdapterPojo>>()
     private val filmResult = MediatorLiveData<List<Film>>()
-    private val isSyncyngWithAPI = MediatorLiveData<Boolean>()
 
     fun charactersAsLiveData() = charactersResult as LiveData<List<CharacterAdapterPojo>>
     fun filmAsLiveData() = filmResult as LiveData<List<Film>>
 
+    var syncListener : SyncListener? = null
 
-    fun syncWithApi() : LiveData<Boolean> {
-       isSyncyngWithAPI.postValue(true)
+
+    interface SyncListener{
+        fun onSynced()
+    }
+
+
+    fun syncWithApi(){
        starWarsApi.getCaracters().enqueue(object : Callback<CharactterResponse?> {
             override fun onFailure(call: Call<CharactterResponse?>, t: Throwable) {
                 Timber.e(t)
@@ -55,7 +60,6 @@ class Repository @Inject constructor(
             }
         })
 
-        return isSyncyngWithAPI
     }
 
     private fun loadFilmlFromApi(){
@@ -66,7 +70,7 @@ class Repository @Inject constructor(
 
             override fun onResponse(call: Call<FilmRespose?>, response: Response<FilmRespose?>) {
                 response.body()?.let {
-                    isSyncyngWithAPI.postValue(false)
+                    syncListener?.onSynced()
                     appExecutors.diskIO().execute {
                         filmDao.insert(it.items)
                     }

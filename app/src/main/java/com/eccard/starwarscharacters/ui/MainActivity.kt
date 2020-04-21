@@ -2,8 +2,6 @@ package com.eccard.starwarscharacters.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             loading ->
             loading?.let {
                 binding.loading = loading
-                binding.executePendingBindings()
                 if (!loading) {
                     navigateToHome()
                 }

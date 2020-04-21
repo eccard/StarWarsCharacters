@@ -78,6 +78,7 @@ dependencies {
 
     implementation deps.coil
     implementation 'com.first.avatargenerator:AvatarImageGenerator:1.3'
+    implementation deps.liveevent
     implementation deps.pallete
 
     kapt deps.dagger.android_support_compiler

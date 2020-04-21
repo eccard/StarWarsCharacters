@@ -33,6 +33,7 @@ versions.timber = "4.7.1"
 versions.arch_core = "2.1.0"
 versions.coil = "0.9.5"
 versions.pallete = "1.0.0"
+versions.liveevent = "1.2.0"
 
 ext.versions = versions
 
@@ -159,6 +160,8 @@ deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.gson = "com.google.code.gson:gson:$versions.gson_version"
 
 deps.coil = "io.coil-kt:coil:$versions.coil"
+
+deps.liveevent = "com.github.hadilq.liveevent:liveevent:$versions.liveevent"
 
 ext.deps = deps
 
