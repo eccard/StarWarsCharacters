@@ -91,7 +91,12 @@ class HomeFrg : Fragment(), Injectable {
             adapter.submitList(result)
         })
 
-        homeViewModel.setQuery("")
+        homeViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+                binding.loading = loading
+            }
+        })
+
     }
 
 

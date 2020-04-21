@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
+import com.hadilq.liveevent.LiveEvent
 import java.util.*
 import javax.inject.Inject
 
@@ -61,4 +62,28 @@ class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(
 //        repository.
     }
 
+    private val _loading = LiveEvent<Boolean>()
+
+    val loading  : LiveData<Boolean> = _loading
+
+    init {
+        loadFromApi()
+    }
+
+    fun loadFromApi(){
+
+        _loading.postValue(true)
+        repository.syncListener = object : Repository.SyncListener {
+            override fun onSynced() {
+                _loading.postValue(false)
+                setQuery("")
+            }
+        }
+        repository.syncWithApi()
+
+    }
+
+    override fun onCleared() {
+        repository.syncListener = null
+    }
 }
