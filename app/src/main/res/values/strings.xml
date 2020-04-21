@@ -10,4 +10,7 @@
     <string name="is_main">Is main :</string>
     <string name="films">Films</string>
     <string name="film_item_poster">Film poster</string>
+    <string name="title">Title :</string>
+    <string name="director">Director :</string>
+    <string name="synopsis">Synopsis</string>
 </resources>

@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:layout_margin="8dp">
 
         <ImageView
             android:layout_width="@dimen/img_view_character_detail_width"
