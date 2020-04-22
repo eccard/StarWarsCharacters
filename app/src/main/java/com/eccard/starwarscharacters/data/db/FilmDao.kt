@@ -4,7 +4,7 @@ import com.eccard.starwarscharacters.data.model.Film
 import io.realm.Realm
 
 //class FilmDao(private val realmx: Realm) {
-class FilmDao() {
+class FilmDao {
 
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(fiml: Film){
@@ -39,5 +39,13 @@ class FilmDao() {
             .findAll()
         return v1
     }
+
+//    fun getCharacterIdsInFilmsThatHasName(name : String) : List<Int>{
+//        val realm = Realm.getDefaultInstance()
+//        val v1 = realm.where(Film::class.java)
+//            .contains("completeName",name)
+//            .findAll()
+//    }
+
 
 }

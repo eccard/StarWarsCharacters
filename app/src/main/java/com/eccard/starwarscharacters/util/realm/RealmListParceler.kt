@@ -1,7 +1,12 @@
-package com.eccard.starwarscharacters.util
+package com.eccard.starwarscharacters.util.realm
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.eccard.starwarscharacters.data.model.Film
+import com.eccard.starwarscharacters.data.model.RealmInt
+import com.google.gson.TypeAdapter
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
 import io.realm.RealmList
 import io.realm.RealmModel
 import kotlinx.android.parcel.Parceler
@@ -42,3 +47,34 @@ interface RealmListParceler <T>: Parceler<RealmList<T>?> where T: RealmModel, T:
 
     val clazz : Class<T>
 }
+
+object FilmRealmListParceler: RealmListParceler<Film> {
+    override val clazz: Class<Film>
+        get() = Film::class.java
+}
+
+object IntRealmListParceler: RealmListParceler<RealmInt> {
+    override val clazz: Class<RealmInt>
+        get() = RealmInt::class.java
+}
+
+//object IntListTypeAdapter: TypeAdapter<RealmList<RealmInt>>() {
+//    override fun write(out: JsonWriter?, value: RealmList<RealmInt>?) {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun read(input: JsonReader?): RealmList<RealmInt> {
+//        val list = RealmList<RealmInt>()
+//        input?.let {
+//            input.beginArray()
+//            while (input.hasNext()) {
+//                list.add(RealmInt(input.nextInt()))
+//            }
+//            input.endArray()
+//        }
+//
+//
+//
+//        return list
+//    }
+//}

@@ -1,7 +1,9 @@
 package com.eccard.starwarscharacters.data.model
 
 import android.os.Parcelable
-import com.eccard.starwarscharacters.util.FilmRealmListParceler
+import com.eccard.starwarscharacters.util.realm.IntListTypeAdapter
+import com.eccard.starwarscharacters.util.realm.IntRealmListParceler
+import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmModel
@@ -28,9 +30,14 @@ open class Film (
     var launchDate : String = "",
 
 
+//    @field:SerializedName("character_ids")
+//    var charactersIds :
+//    @WriteWith<FilmRealmListParceler> RealmList<Film> = RealmList(),
+
     @field:SerializedName("character_ids")
-    var charactersIds :
-    @WriteWith<FilmRealmListParceler> RealmList<Film> = RealmList(),
+    @field:JsonAdapter(IntListTypeAdapter::class)
+    var charactersIds : @WriteWith<IntRealmListParceler> RealmList<RealmInt> = RealmList(),
+
 
     @field:SerializedName("synopsis")
     var synopsis : String = "",
