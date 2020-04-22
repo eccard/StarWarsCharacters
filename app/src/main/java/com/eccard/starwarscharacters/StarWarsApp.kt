@@ -5,6 +5,7 @@ import android.app.Application
 import com.eccard.starwarscharacters.di.AppInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import io.realm.Realm
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -18,6 +19,7 @@ class StarWarsApp : Application(), HasActivityInjector {
             Timber.plant(Timber.DebugTree())
         }
         AppInjector.init(this)
+        Realm.init(this)
     }
 
     override fun activityInjector() = dispatchingAndroidInjector

@@ -2,7 +2,7 @@ package com.eccard.starwarscharacters.di
 
 import android.app.Application
 import android.content.Context
-import androidx.room.Room
+import com.eccard.starwarscharacters.AppExecutors
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -13,8 +13,8 @@ import com.eccard.starwarscharacters.data.api.MockInterceptor
 import com.eccard.starwarscharacters.data.api.StarWarsApi
 import com.eccard.starwarscharacters.data.db.CharactterDao
 import com.eccard.starwarscharacters.data.db.FilmDao
-import com.eccard.starwarscharacters.data.db.StarWarsDb
 import dagger.Module
+import io.realm.Realm
 import okhttp3.Interceptor
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -56,26 +56,36 @@ class AppModule {
         return retrofit.create(StarWarsApi::class.java)
     }
 
+//    @Singleton
+//    @Provides
+//    fun provideDb(app: Application): StarWarsDb {
+//        return Room
+//            .databaseBuilder(app, StarWarsDb::class.java, "starWars.db")
+//            .fallbackToDestructiveMigration()
+//            .build()
+//    }
+//
     @Singleton
     @Provides
-    fun provideDb(app: Application): StarWarsDb {
-        return Room
-            .databaseBuilder(app, StarWarsDb::class.java, "starWars.db")
-            .fallbackToDestructiveMigration()
-            .build()
+//    fun provideUserDao(realm : Realm): CharactterDao {
+    fun provideUserDao(): CharactterDao {
+//        return CharactterDao(realm)
+        return CharactterDao()
     }
 
     @Singleton
     @Provides
-    fun provideUserDao(db: StarWarsDb): CharactterDao {
-        return db.characterDao()
+//    fun provideFilmDao(realm : Realm): FilmDao {
+    fun provideFilmDao(): FilmDao {
+//        return FilmDao(realm)
+        return FilmDao()
     }
 
-    @Singleton
-    @Provides
-    fun provideFilmDao(db: StarWarsDb): FilmDao {
-        return db.filmDao()
-    }
+//    @Provides
+//    fun providesRealm(appExecutors: AppExecutors, context: Context) : Realm {
+//        Realm.init(context)
+//        return Realm.getDefaultInstance()
+//    }
 
 //    @Provides
 //    @Singleton

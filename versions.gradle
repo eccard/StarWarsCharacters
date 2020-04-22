@@ -3,6 +3,7 @@ ext.deps = [:]
 def versions = [:]
 versions.activity = '1.1.0'
 versions.android_gradle_plugin = '3.6.2'
+versions.realm_gradle_plugin = '6.0.2'
 versions.annotations = "1.0.0"
 versions.appcompat = "1.2.0-alpha02"
 versions.dagger = "2.16"
@@ -56,6 +57,8 @@ activity.activity_ktx = "androidx.activity:activity-ktx:$versions.activity"
 deps.activity = activity
 
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+
+deps.realm_gradle_plugin = "io.realm:realm-gradle-plugin:$versions.realm_gradle_plugin"
 
 deps.annotations = "androidx.annotation:annotation:$versions.annotations"
 

@@ -1,6 +1,6 @@
 package com.eccard.starwarscharacters.util
 
-import androidx.room.TypeConverter
+//import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -13,7 +13,7 @@ class IntListTypeConverter {
 
         var gson = Gson()
 
-        @TypeConverter
+//        @TypeConverter
         @JvmStatic
         fun stringToSomeObjectList(data: String?): List<Int?> {
             if (data == null) {
@@ -24,7 +24,7 @@ class IntListTypeConverter {
             return gson.fromJson<List<Int?>>(data, listType)
         }
 
-        @TypeConverter
+//        @TypeConverter
         @JvmStatic
         fun someObjectListToString(someObjects: List<Int?>?): String? {
             return gson.toJson(someObjects)

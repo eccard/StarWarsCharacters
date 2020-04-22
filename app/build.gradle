@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 29
@@ -72,7 +73,7 @@ dependencies {
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.java8
     implementation deps.fragment.runtime_ktx
-    implementation deps.room.runtime
+//    implementation deps.room.runtime
 
     implementation deps.timber
 
@@ -83,7 +84,7 @@ dependencies {
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
-    kapt deps.room.compiler
+//    kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 
 

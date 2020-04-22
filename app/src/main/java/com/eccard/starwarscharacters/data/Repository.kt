@@ -96,31 +96,31 @@ class Repository @Inject constructor(
                 val films = filmDao.getFilmsFilteresbyName(query)
 
                 val charactesrInFilms = HashSet<Int>()
+//
+//
+//                for (film in films){
+//                    film.charactersIds?.let {
+//                        charactesrInFilms.addAll(it)
+//                    }
+//                }
+//
+//                // removing form query all characteres filteres by name
+//                for(character in characttersFilteredByName){
+//                    charactesrInFilms.remove(character.id)
+//                }
+//
+//                val charactersInFilms = charactterDao.getCharacttersByIds(charactesrInFilms.toList())
+//
+//
+//                val mutableListAdapter = characttersFilteredByName.map { CharacterAdapterPojo(it,null) }
+//
+//                val characterInFilmsPojo = search(films,charactersInFilms)
+//
+//                val mutableList = mutableListOf<CharacterAdapterPojo>()
+//                mutableList.addAll(mutableListAdapter)
+//                mutableList.addAll(characterInFilmsPojo)
 
-
-                for (film in films){
-                    film.charactersIds?.let {
-                        charactesrInFilms.addAll(it)
-                    }
-                }
-
-                // removing form query all characteres filteres by name
-                for(character in characttersFilteredByName){
-                    charactesrInFilms.remove(character.id)
-                }
-
-                val charactersInFilms = charactterDao.getCharacttersByIds(charactesrInFilms.toList())
-
-
-                val mutableListAdapter = characttersFilteredByName.map { CharacterAdapterPojo(it,null) }
-
-                val characterInFilmsPojo = search(films,charactersInFilms)
-
-                val mutableList = mutableListOf<CharacterAdapterPojo>()
-                mutableList.addAll(mutableListAdapter)
-                mutableList.addAll(characterInFilmsPojo)
-
-                charactersResult.postValue(mutableList)
+//                charactersResult.postValue(mutableList)
             }
         }
 
@@ -134,14 +134,14 @@ class Repository @Inject constructor(
             val sBuffer = StringBuffer()
 
             for (film in films){
-                film.charactersIds?.let {
-                        if (it.contains(chars.id)){
-                            sBuffer.append(film.name)
-                            sBuffer.append(", ")
-                    }
-                }
+//                film.charactersIds?.let {
+//                        if (it.contains(chars.id)){
+//                            sBuffer.append(film.name)
+//                            sBuffer.append(", ")
+//                    }
+//                }
             }
-            list.add(CharacterAdapterPojo(chars, sBuffer.toString()))
+//            list.add(CharacterAdapterPojo(chars, sBuffer.toString()))
         }
 
         return list

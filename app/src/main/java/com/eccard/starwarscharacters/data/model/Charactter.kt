@@ -1,28 +1,28 @@
 package com.eccard.starwarscharacters.data.model
 
 import android.os.Parcelable
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
-@Entity(
-    primaryKeys = ["id"]
-)
+
 @Parcelize
-data class Charactter(
+public open class Charactter(
     @field:SerializedName("id")
-    val id : Int,
+    @PrimaryKey
+    var id : Int = 0,
     @field:SerializedName("isMain")
-    val isMain : Boolean,
+    var isMain : Boolean = false,
     @field:SerializedName("name")
-    val name : String,
+    var name : String = "",
     @field:SerializedName("image_url")
-    val imageUrl : String,
+    var imageUrl : String = "",
     @field:SerializedName("gender")
-    val gender : String,
+    var gender : String = "",
     @field:SerializedName("first_appearance")
-    val firstAppearance : String?,
+    var firstAppearance : String? = null,
     @field:SerializedName("last_appearance")
-    val lastAppearance : String?
-) : Parcelable
+    var lastAppearance : String? = null
+) : RealmObject(), Parcelable
 
