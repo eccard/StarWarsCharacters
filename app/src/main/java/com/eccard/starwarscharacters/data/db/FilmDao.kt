@@ -2,50 +2,58 @@ package com.eccard.starwarscharacters.data.db
 
 import com.eccard.starwarscharacters.data.model.Film
 import io.realm.Realm
+import timber.log.Timber
+import java.lang.Exception
 
-//class FilmDao(private val realmx: Realm) {
 class FilmDao {
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(fiml: Film){
-        val realm = Realm.getDefaultInstance()
-
-        realm.beginTransaction()
-        realm.copyToRealmOrUpdate(fiml)
-        realm.commitTransaction()
-    }
-
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(fimlList: List<Film>){
-        val realm = Realm.getDefaultInstance()
-        val v1 = realm.beginTransaction()
-        val v2 = realm.copyToRealmOrUpdate(fimlList)
-        val v3 = realm.commitTransaction()
+        var realm : Realm? = null
+        try {
+            realm = Realm.getDefaultInstance()
+            realm.executeTransaction {
+                it.copyToRealmOrUpdate(fimlList)
+            }
+        } catch (exeption : Exception){
+            Timber.e(exeption)
+        }finally {
+            realm?.close()
+        }
     }
 
-//    @Query("SELECT * FROM  film")
     fun getAllFilms() : List<Film>{
-        val realm = Realm.getDefaultInstance()
-        val v1 = realm.where(Film::class.java)
-            .findAll()
-        return v1
+        var filmList : List<Film>? = null
+        var realm : Realm? = null
+        try {
+            realm = Realm.getDefaultInstance()
+            filmList = realm.where(Film::class.java)
+                .findAll().map {it.clone()}
+        } catch (exeption : Exception){
+                Timber.e(exeption)
+        }finally {
+            realm?.close()
+        }
+
+        return filmList ?: emptyList()
     }
 
-//    @Query("SELECT * FROM film WHERE completeName LIKE '%' || :name || '%'")
     fun getFilmsFilteresbyName(name : String) : List<Film>{
-        val realm = Realm.getDefaultInstance()
-        val v1 = realm.where(Film::class.java)
-            .contains("completeName",name)
-            .findAll()
-        return v1
+
+        var filmList : List<Film>? = null
+        var realm : Realm? = null
+
+        try {
+            realm = Realm.getDefaultInstance()
+            filmList = realm.where(Film::class.java)
+                .contains("completeName",name)
+                .findAll().map { it.clone() }
+        } catch (exeption : Exception){
+            Timber.e(exeption)
+        }finally {
+            realm?.close()
+        }
+
+        return filmList ?: emptyList()
     }
-
-//    fun getCharacterIdsInFilmsThatHasName(name : String) : List<Int>{
-//        val realm = Realm.getDefaultInstance()
-//        val v1 = realm.where(Film::class.java)
-//            .contains("completeName",name)
-//            .findAll()
-//    }
-
 
 }

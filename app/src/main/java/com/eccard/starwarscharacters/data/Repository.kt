@@ -11,6 +11,7 @@ import com.eccard.starwarscharacters.data.db.FilmDao
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.data.model.Film
+import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,11 +87,16 @@ class Repository @Inject constructor(
     }
 
     fun findByNameOrFilm(query : String) : LiveData<List<CharacterAdapterPojo>>{
+        if ( query.isBlank()){
+            charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
+        } else {
+
+            val result = Realm.getDefaultInstance().where(Charactter::class.java).contains("name","ttt")
+                .findAllAsync()
+
 
         appExecutors.diskIO().execute {
-            if ( query.isBlank()){
-                charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
-            } else {
+
                 val characttersFilteredByName = charactterDao.getCharacttersWithName(query)
 
                 val films = filmDao.getFilmsFilteresbyName(query)
