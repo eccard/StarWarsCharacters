@@ -2,21 +2,19 @@ package com.eccard.starwarscharacters.di
 
 import android.app.Application
 import android.content.Context
-import com.eccard.starwarscharacters.AppExecutors
-import dagger.Provides
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import javax.inject.Named
-import javax.inject.Singleton
 import com.eccard.starwarscharacters.BuildConfig
 import com.eccard.starwarscharacters.data.api.MockInterceptor
 import com.eccard.starwarscharacters.data.api.StarWarsApi
 import com.eccard.starwarscharacters.data.db.CharactterDao
 import com.eccard.starwarscharacters.data.db.FilmDao
 import dagger.Module
-import io.realm.Realm
+import dagger.Provides
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Module(includes = [ViewModelModule::class])
 class AppModule {

@@ -18,12 +18,16 @@ class MockInterceptor : Interceptor {
         val uri = chain.request().url().uri().toString()
         Timber.d("intercept $uri")
 
-        val responseString = if (uri == BuildConfig.BASE_URL + "/" + Constants.CHARACTER){
-            getCharacters
-        } else if (uri == BuildConfig.BASE_URL + "/" + Constants.FILMS) {
-            getFilms
-        } else {
-            ""
+        val responseString = when (uri) {
+            BuildConfig.BASE_URL + "/" + Constants.CHARACTER -> {
+                getCharacters
+            }
+            BuildConfig.BASE_URL + "/" + Constants.FILMS -> {
+                getFilms
+            }
+            else -> {
+                ""
+            }
         }
 
 	Timber.d("simulating internet delay init")

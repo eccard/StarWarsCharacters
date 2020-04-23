@@ -29,11 +29,6 @@ open class Film (
     @field:SerializedName("launch_date")
     var launchDate : String = "",
 
-
-//    @field:SerializedName("character_ids")
-//    var charactersIds :
-//    @WriteWith<FilmRealmListParceler> RealmList<Film> = RealmList(),
-
     @field:SerializedName("character_ids")
     @field:JsonAdapter(IntListTypeAdapter::class)
     var charactersIds : @WriteWith<IntRealmListParceler> RealmList<RealmInt> = RealmList(),

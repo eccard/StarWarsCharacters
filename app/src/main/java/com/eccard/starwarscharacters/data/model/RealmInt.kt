@@ -2,7 +2,6 @@ package com.eccard.starwarscharacters.data.model
 
 import android.os.Parcelable
 import io.realm.RealmModel
-import io.realm.RealmObject
 import io.realm.annotations.RealmClass
 import kotlinx.android.parcel.Parcelize
 

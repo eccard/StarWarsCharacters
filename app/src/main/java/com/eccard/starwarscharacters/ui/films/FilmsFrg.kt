@@ -14,15 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Film
-import com.eccard.starwarscharacters.databinding.FilmItemBinding
 import com.eccard.starwarscharacters.databinding.FilmsFrgBinding
-import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
 import com.eccard.starwarscharacters.ui.MainActivity
 import com.eccard.starwarscharacters.ui.common.ItemOffsetDecoration
-import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
-import com.eccard.starwarscharacters.ui.home.CharacterAdapter
-import com.eccard.starwarscharacters.ui.home.HomeViewModel
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -39,9 +34,9 @@ class FilmsFrg: Fragment(), Injectable {
 
     lateinit var binding : FilmsFrgBinding
 
-    lateinit var adapter : FilmsAdapter
+    private lateinit var adapter : FilmsAdapter
 
-    val viewModel: FilmsViewModel by viewModels {
+    private val viewModel: FilmsViewModel by viewModels {
         viewModelFactory
     }
 

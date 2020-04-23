@@ -37,7 +37,7 @@ class HomeFrg : Fragment(), Injectable {
 
     private lateinit var adapter: CharacterAdapter
 
-    val viewModel: HomeViewModel by viewModels {
+    private val viewModel: HomeViewModel by viewModels {
         viewModelFactory
     }
 

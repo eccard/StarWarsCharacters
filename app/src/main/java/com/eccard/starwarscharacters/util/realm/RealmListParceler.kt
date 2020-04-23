@@ -4,9 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.data.model.RealmInt
-import com.google.gson.TypeAdapter
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonWriter
 import io.realm.RealmList
 import io.realm.RealmModel
 import kotlinx.android.parcel.Parceler
@@ -26,10 +23,12 @@ fun <T> Parcel.readRealmList(clazz: Class<T>): RealmList<T>?
 fun <T> Parcel.writeRealmList(realmList: RealmList<T>?, clazz: Class<T>)
         where T : RealmModel,
               T : Parcelable {
-    writeInt(when {
-        realmList == null -> 0
-        else -> 1
-    })
+    writeInt(
+        when (realmList) {
+            null -> 0
+            else -> 1
+        }
+    )
     if (realmList != null) {
         writeInt(realmList.size)
         for (t in realmList) {

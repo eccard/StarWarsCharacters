@@ -2,7 +2,6 @@ package com.eccard.starwarscharacters.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.eccard.starwarscharacters.ui.MainViewModel
 import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailViewModel
 import com.eccard.starwarscharacters.ui.films.FilmsViewModel
 import com.eccard.starwarscharacters.ui.home.HomeViewModel

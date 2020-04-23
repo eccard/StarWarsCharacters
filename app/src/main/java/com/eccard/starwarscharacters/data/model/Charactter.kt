@@ -3,7 +3,6 @@ package com.eccard.starwarscharacters.data.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmModel
-import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import kotlinx.android.parcel.Parcelize

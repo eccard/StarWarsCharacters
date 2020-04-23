@@ -37,7 +37,7 @@ class FilmDetailFrg: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let {
-            val film = it.getParcelable<Film>(FilmDetailFrg.FILM_KEY)
+            val film = it.getParcelable<Film>(FILM_KEY)
             binding.film = film
         }
     }

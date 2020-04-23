@@ -29,8 +29,8 @@ class Repository @Inject constructor(
     private val charactersResult = MediatorLiveData<List<CharacterAdapterPojo>>()
     private val filmResult = MediatorLiveData<List<Film>>()
 
-    fun charactersAsLiveData() = charactersResult as LiveData<List<CharacterAdapterPojo>>
-    fun filmAsLiveData() = filmResult as LiveData<List<Film>>
+    private fun charactersAsLiveData() = charactersResult as LiveData<List<CharacterAdapterPojo>>
+    private fun filmAsLiveData() = filmResult as LiveData<List<Film>>
 
     var syncListener : SyncListener? = null
 
