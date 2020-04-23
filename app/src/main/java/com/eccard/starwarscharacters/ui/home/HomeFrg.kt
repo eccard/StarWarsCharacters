@@ -56,6 +56,7 @@ class HomeFrg : Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.lifecycleOwner = viewLifecycleOwner
         initRecyclerView()
         initSearchInputListener()
         viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
@@ -91,6 +92,7 @@ class HomeFrg : Fragment(), Injectable {
         adapter = rvAdapter
 
         binding.characterList.addItemDecoration(SimpleDividerItemDecoration(binding.characterList.context))
+        binding.searchResult = viewModel.results
         viewModel.results.observe(viewLifecycleOwner, Observer { result ->
             adapter.submitList(result)
         })
