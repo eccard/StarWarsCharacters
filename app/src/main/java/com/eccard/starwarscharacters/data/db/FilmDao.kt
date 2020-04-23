@@ -2,6 +2,7 @@ package com.eccard.starwarscharacters.data.db
 
 import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.data.model.RealmInt
+import io.realm.Case
 import io.realm.Realm
 import io.realm.RealmList
 import timber.log.Timber
@@ -46,7 +47,7 @@ class FilmDao {
         try {
             realm = Realm.getDefaultInstance()
             filmList = realm.where(Film::class.java)
-                .contains("completeName",name)
+                .contains("completeName",name, Case.INSENSITIVE)
                 .findAll().map { it.copyFromRealm() }
         } catch (exception : Exception){
             Timber.e(exception)
