@@ -55,15 +55,15 @@ const val getCharacters = """
  	"items": [{
  			"id": 0,
  			"isMain": true,
- 			"name": "Anakin Skywalker,Darth Vader",
- 			"image_url": "https://upload.wikimedia.org/wikipedia/en/7/76/Darth_Vader.jpg",
+ 			"name": "Anakin Skywalker, Darth Vader",
+ 			"image_url": "https://66.media.tumblr.com/9856bd42f18ce548f05d1c2701d298be/tumblr_pxqwf3OeH81w4t7wqo1_500.jpg",
  			"gender": "male",
  			"first_appearance": "Star Wars (film)"
  		},
  		{
  			"id": 2,
  			"isMain": true,
- 			"name": "Ben Solo/Kylo Ren",
+ 			"name": "Ben Solo, Kylo Ren",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Kylo_Ren.png/330px-Kylo_Ren.png",
  			"gender": "male",
  			"first_appearance": "Star Wars: The Force Awakens",
