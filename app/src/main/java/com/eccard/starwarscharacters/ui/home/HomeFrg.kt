@@ -72,6 +72,7 @@ class HomeFrg : Fragment(), Injectable {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_films -> {
+                dismissKeyboard(binding.input.windowToken)
                 (activity as MainActivity).navigateToFilmFrg()
                 true
             }
