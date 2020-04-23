@@ -66,11 +66,9 @@ class CharactterDao {
             var realm : Realm? = null
             try {
                 realm = Realm.getDefaultInstance()
-                var realmQuery =  realm.where(Charactter::class.java)
-                for (id in ids) {
-                    realmQuery = realmQuery.equalTo("id", id)
-                }
-                characterList = realmQuery.findAll().map {it.copyFromRealm()}
+                characterList = realm.where(Charactter::class.java)
+                    .`in`("id",ids.toTypedArray())
+                    .findAll().map{it.copyFromRealm()}
             } catch (exeption : Exception){
                 Timber.e(exeption)
             }finally {
