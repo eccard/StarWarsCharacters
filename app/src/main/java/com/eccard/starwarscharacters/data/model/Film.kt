@@ -47,8 +47,4 @@ open class Film (
     @field:SerializedName("cover_album")
     var coverAlbum : String = ""
 
-) : RealmModel, Parcelable {
-    fun clone() : Film {
-        return Film(this.id,this.name,this.completeName,this.launchDate,this.charactersIds,this.synopsis,this.director,this.trailer,this.coverAlbum)
-    }
-}
+) : RealmModel, Parcelable

@@ -1,9 +1,10 @@
 package com.eccard.starwarscharacters.data.db
 
 import com.eccard.starwarscharacters.data.model.Film
+import com.eccard.starwarscharacters.data.model.RealmInt
 import io.realm.Realm
+import io.realm.RealmList
 import timber.log.Timber
-import java.lang.Exception
 
 class FilmDao {
 
@@ -27,9 +28,9 @@ class FilmDao {
         try {
             realm = Realm.getDefaultInstance()
             filmList = realm.where(Film::class.java)
-                .findAll().map {it.clone()}
-        } catch (exeption : Exception){
-                Timber.e(exeption)
+                .findAll().map {it.copyFromRealm()}
+        } catch (exception : Exception){
+                Timber.e(exception)
         }finally {
             realm?.close()
         }
@@ -46,9 +47,9 @@ class FilmDao {
             realm = Realm.getDefaultInstance()
             filmList = realm.where(Film::class.java)
                 .contains("completeName",name)
-                .findAll().map { it.clone() }
-        } catch (exeption : Exception){
-            Timber.e(exeption)
+                .findAll().map { it.copyFromRealm() }
+        } catch (exception : Exception){
+            Timber.e(exception)
         }finally {
             realm?.close()
         }
@@ -56,4 +57,15 @@ class FilmDao {
         return filmList ?: emptyList()
     }
 
+    private fun Film.copyFromRealm(): Film {
+        val list = RealmList<RealmInt>()
+        for (char in this.charactersIds){
+            list.add(RealmInt(char._value))
+        }
+        return Film(this.id,this.name,this.completeName,this.launchDate,list,this.synopsis,this.director,this.trailer,this.coverAlbum)
+    }
+
+
+
 }
+

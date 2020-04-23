@@ -29,7 +29,7 @@ class CharactterDao {
         try {
             realm = Realm.getDefaultInstance()
             characterList = realm.where(Charactter::class.java)
-                .findAll().map { it.clone() }
+                .findAll().map { it.copyFromRealm() }
         } catch (exeption : Exception){
             Timber.e(exeption)
         }finally {
@@ -47,7 +47,7 @@ class CharactterDao {
             realm = Realm.getDefaultInstance()
             characterList = realm.where(Charactter::class.java)
                 .contains("name",name, Case.INSENSITIVE)
-                .findAll().map { it.clone() }
+                .findAll().map { it.copyFromRealm() }
         } catch (exeption : Exception){
             Timber.e(exeption)
         }finally {
@@ -70,7 +70,7 @@ class CharactterDao {
                 for (id in ids) {
                     realmQuery = realmQuery.equalTo("id", id)
                 }
-                characterList = realmQuery.findAll().map {it.clone()}
+                characterList = realmQuery.findAll().map {it.copyFromRealm()}
             } catch (exeption : Exception){
                 Timber.e(exeption)
             }finally {
@@ -79,5 +79,9 @@ class CharactterDao {
 
         }
         return characterList ?: emptyList()
+    }
+
+    private fun Charactter.copyFromRealm(): Charactter {
+        return Charactter(this.id,this.isMain,this.name,this.imageUrl,this.gender,this.firstAppearance,this.lastAppearance)
     }
 }

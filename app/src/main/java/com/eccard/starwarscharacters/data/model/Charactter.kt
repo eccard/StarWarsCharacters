@@ -26,11 +26,7 @@ open class Charactter(
     var firstAppearance : String? = null,
     @field:SerializedName("last_appearance")
     var lastAppearance : String? = null
-) : RealmModel, Parcelable {
-    fun clone() : Charactter{
-        return Charactter(this.id,this.isMain,this.name,this.imageUrl,this.gender,this.firstAppearance,this.lastAppearance)
-    }
-}
+) : RealmModel, Parcelable
 
 
 

@@ -147,7 +147,7 @@ class Repository @Inject constructor(
                     }
                 }
             }
-            list.add(CharacterAdapterPojo(chars.clone(), sBuffer.toString()))
+            list.add(CharacterAdapterPojo(chars, sBuffer.toString()))
         }
 
         return list
