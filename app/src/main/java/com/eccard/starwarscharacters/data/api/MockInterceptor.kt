@@ -288,13 +288,6 @@ const val getCharacters = """
  			"gender": ""
  		},
  		{
- 			"id": 29,
- 			"isMain": true,
- 			"name": "Ben Solo/Kylo Ren",
- 			"image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgD4TrHfW25eI3KSB0EWqOlV0pOQekjj1RCiQdyWAhOEmXxh-Y&s",
- 			"gender": ""
- 		},
- 		{
  			"id": 30,
  			"isMain": true,
  			"name": "Supreme Leader Snoke",
@@ -833,7 +826,7 @@ const val getFilms = """
         "name" : "The Force Awakens",
         "complete_name": "Star Wars: Episode VII - The Force Awakens (2015)",
         "launch_date": "2015-12-18",
-        "character_ids": [10,4,5,29,26,17,27,30,53,8,11],
+        "character_ids": [10,4,5,2,26,17,27,30,53,8,11],
         "synopsis" : "Three decades after the Empire's defeat, a new threat arises in the militant First Order. Defected stormtrooper Finn and the scavenger Rey are caught up in the Resistance's search for the missing Luke Skywalker.",
         "director": "J.J. Abrams",
         "cover_album" : "https://m.media-amazon.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SY1000_CR0,0,677,1000_AL_.jpg",
@@ -844,7 +837,7 @@ const val getFilms = """
         "name" : "The Last Jedi",
         "complete_name": "Star Wars: Episode VIII - The Last Jedi (2017)",
         "launch_date": "2017-12-14",
-        "character_ids": [4,5,29,26,17,30,53,8,16,15,6,11,7,9],
+        "character_ids": [4,5,2,26,17,30,53,8,16,15,6,11,7,9],
         "synopsis" : " Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.",
         "director": "Rian Johnson",
         "cover_album" : "https://m.media-amazon.com/images/M/MV5BMjQ1MzcxNjg4N15BMl5BanBnXkFtZTgwNzgwMjY4MzI@._V1_SY1000_CR0,0,675,1000_AL_.jpg",
@@ -855,7 +848,7 @@ const val getFilms = """
         "name" : "The Rise of Skywalker",
         "complete_name": "Star Wars: Episode IX - The Rise of Skywalker (2019)",
         "launch_date": "2019-12-19",
-        "character_ids": [5,4,29,26,17,8,53,27,76,25,18,7,9,27,0,35,30,64,13,31,3,32,6,32,14,10],
+        "character_ids": [5,4,2,26,17,8,53,27,76,25,18,7,9,27,0,35,30,64,13,31,3,32,6,32,14,10],
         "synopsis" : "The surviving members of the resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak bringing the Skywalker saga to its end.",
         "director": "J.J. Abrams",
         "cover_album" : "https://m.media-amazon.com/images/M/MV5BMDljNTQ5ODItZmQwMy00M2ExLTljOTQtZTVjNGE2NTg0NGIxXkEyXkFqcGdeQXVyODkzNTgxMDg@._V1_SY1000_CR0,0,675,1000_AL_.jpg",
