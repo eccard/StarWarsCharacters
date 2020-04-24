@@ -18,13 +18,19 @@
         android:gravity="center_vertical"
         android:layout_margin="8dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/img_view_film_width"
-            android:layout_height="@dimen/img_view_film_height"
-            tools:src="@mipmap/ic_launcher"
-            app:showImageRec="@{film.coverAlbum}"
-            app:name="@{film.name}"
-            android:contentDescription="@string/film_item_poster"/>
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/playerView"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            />
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="@dimen/img_view_film_width"-->
+<!--            android:layout_height="@dimen/img_view_film_height"-->
+<!--            tools:src="@mipmap/ic_launcher"-->
+<!--            app:showImageRec="@{film.coverAlbum}"-->
+<!--            app:name="@{film.name}"-->
+<!--            android:contentDescription="@string/film_item_poster"/>-->
 
         <include layout="@layout/film_details"
             bind:secFilm="@{film}"/>

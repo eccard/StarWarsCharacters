@@ -22,9 +22,6 @@ import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class FilmsFrg: Fragment(), Injectable {
-    companion object {
-        val TAG = FilmsFrg::class.simpleName
-    }
 
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory

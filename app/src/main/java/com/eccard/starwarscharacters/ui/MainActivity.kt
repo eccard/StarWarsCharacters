@@ -29,28 +29,28 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private fun navigateToHome() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_content, HomeFrg(), HomeFrg.TAG)
+            .add(R.id.main_content, HomeFrg())
             .commit()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     fun navigateToDetailsFrg(charactter: Charactter) {
-        navigateToFrg(CharacterDetailFrg.newInstance(charactter), CharacterDetailFrg.TAG)
+        navigateToFrg(CharacterDetailFrg.newInstance(charactter))
     }
 
     fun navigateToFilmDetailFrg(film: Film) {
-        navigateToFrg(FilmDetailFrg.newInstance(film), FilmDetailFrg.TAG)
+        navigateToFrg(FilmDetailFrg.newInstance(film))
     }
 
     fun navigateToFilmFrg() {
-        navigateToFrg(FilmsFrg(), FilmsFrg.TAG)
+        navigateToFrg(FilmsFrg())
     }
 
-    private fun navigateToFrg(fragment: Fragment, tag: String?) {
+    private fun navigateToFrg(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, fragment, tag)
-            .addToBackStack(tag)
+            .replace(R.id.main_content, fragment)
+            .addToBackStack(null)
             .commit()
     }
 }

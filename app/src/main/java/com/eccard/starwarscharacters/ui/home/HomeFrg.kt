@@ -23,10 +23,6 @@ import javax.inject.Inject
 
 class HomeFrg : Fragment(), Injectable {
 
-    companion object {
-        val TAG = HomeFrg::class.simpleName
-    }
-
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 

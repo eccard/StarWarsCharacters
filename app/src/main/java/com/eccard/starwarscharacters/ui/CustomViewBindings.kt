@@ -8,6 +8,7 @@ import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.avatarfirst.avatargenlib.AvatarConstants
 import com.avatarfirst.avatargenlib.AvatarGenerator
+import com.eccard.starwarscharacters.R
 
 
 object CustomViewBindings {
@@ -62,9 +63,9 @@ object CustomViewBindings {
 
         val sBuffer = StringBuffer()
         if (isMain){
-            sBuffer.append("Is main character")
+            sBuffer.append(tv.context.getString(R.string.main_character))
         } else {
-            sBuffer.append("Isn't main character")
+            sBuffer.append(tv.context.getString(R.string.support_character))
         }
 
         foundFilms?.let{

@@ -14,4 +14,6 @@
     <string name="director">Director :</string>
     <string name="synopsis">Synopsis</string>
     <string name="empty_search_result">No results for <b>%s</b></string>
+    <string name="main_character">Is main character</string>
+    <string name="support_character">Is support character</string>
 </resources>
