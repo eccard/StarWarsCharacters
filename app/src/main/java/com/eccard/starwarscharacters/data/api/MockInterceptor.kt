@@ -64,7 +64,7 @@ const val getCharacters = """
  			"id": 2,
  			"isMain": true,
  			"name": "Ben Solo, Kylo Ren",
- 			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Kylo_Ren.png/330px-Kylo_Ren.png",
+ 			"image_url": "https://i.pinimg.com/236x/71/06/dc/7106dc5edb54d56cb15492e1772fbec5.jpg",
  			"gender": "male",
  			"first_appearance": "Star Wars: The Force Awakens",
  			"last_appearance": "Star Wars: The Rise of Skywalker"
