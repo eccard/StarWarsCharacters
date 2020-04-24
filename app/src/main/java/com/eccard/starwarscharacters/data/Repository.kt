@@ -135,23 +135,28 @@ class Repository @Inject constructor(
 
     private fun search(films : List<Film>, charactersInFilms  : List<Charactter>) : List<CharacterAdapterPojo> {
         val list = mutableListOf<CharacterAdapterPojo>()
-
         for ( chars in charactersInFilms){
-            val sBuffer = StringBuffer()
-
-            for (film in films){
-                for (characterId in film.charactersIds){
-                    if (chars.id == characterId._value){
-                        sBuffer.append(film.name)
-                        sBuffer.append(", ")
-                    }
-                }
-            }
-            list.add(CharacterAdapterPojo(chars, sBuffer.toString()))
+            list.add(CharacterAdapterPojo(chars, checkIfCharacterInFilmAndReturnFilmName(films,chars.id)))
         }
-
         return list
     }
+
+    private fun checkIfCharacterInFilmAndReturnFilmName(films : List<Film>, characterId : Int) : String {
+        val sBuffer = StringBuffer()
+        for (film in films){
+            for (charactersInFilm in film.charactersIds){
+                if (charactersInFilm._value == characterId){
+                    sBuffer.append(film.completeName)
+                    sBuffer.append(", ")
+                }
+            }
+        }
+        if (sBuffer.isNotEmpty()){
+            sBuffer.setLength(sBuffer.length -2)
+        }
+        return sBuffer.toString()
+    }
+
 
     fun loadAllFilms() : LiveData<List<Film>> {
         appExecutors.diskIO().execute {
@@ -160,6 +165,16 @@ class Repository @Inject constructor(
         }
 
         return filmAsLiveData()
+    }
+
+    private val nameOfFilms = MediatorLiveData<String>()
+    fun findFilmThatHasCharacter(characterId : Int) : LiveData<String>{
+        appExecutors.diskIO().execute {
+            nameOfFilms.postValue(
+                checkIfCharacterInFilmAndReturnFilmName(filmDao.getAllFilms(),characterId)
+            )
+        }
+        return nameOfFilms as LiveData<String>
     }
 
 }

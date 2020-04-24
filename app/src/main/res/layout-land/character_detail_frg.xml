@@ -8,6 +8,9 @@
         <variable
             name="character"
             type="com.eccard.starwarscharacters.data.model.Charactter" />
+        <variable
+            name="filmsOfCharacter"
+            type="String"/>
     </data>
 
 
@@ -27,6 +30,7 @@
             android:contentDescription="@string/character_image"/>
 
         <include layout="@layout/character_details"
+            bind:secFilmsOfCharacter="@{filmsOfCharacter}"
             bind:secCharacter="@{character}"/>
 
 

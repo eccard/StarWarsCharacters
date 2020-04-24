@@ -4,6 +4,9 @@
         <variable
             name="secCharacter"
             type="com.eccard.starwarscharacters.data.model.Charactter" />
+        <variable
+            name="secFilmsOfCharacter"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -103,52 +106,25 @@
                         tools:text="aflkjaskfasdfasdfasd"/>
                 </TableRow>
 
-                <TableRow
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    >
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textStyle="bold"
+                    android:text="@string/appearances"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold"
-                        android:text="@string/first_appearance"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:text="@{secCharacter.firstAppearance}"/>
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_over_view"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold"
-                        android:text="@string/last_appearance"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:text="@{secCharacter.lastAppearance}"/>
-                </TableRow>
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:text="@{secFilmsOfCharacter}"/>
 
             </LinearLayout>
         </ScrollView>

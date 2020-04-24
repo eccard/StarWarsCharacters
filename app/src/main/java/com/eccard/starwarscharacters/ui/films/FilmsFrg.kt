@@ -50,6 +50,7 @@ class FilmsFrg: Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.lifecycleOwner = viewLifecycleOwner
         initRecyclerView()
     }
 
@@ -76,8 +77,6 @@ class FilmsFrg: Fragment(), Injectable {
         viewModel.films.observe(viewLifecycleOwner, Observer<List<Film>?> {films ->
             adapter.submitList(films)
         })
-
-
     }
 
 }

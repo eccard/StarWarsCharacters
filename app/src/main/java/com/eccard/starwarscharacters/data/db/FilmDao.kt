@@ -58,6 +58,8 @@ class FilmDao {
         return filmList ?: emptyList()
     }
 
+
+
     private fun Film.copyFromRealm(): Film {
         val list = RealmList<RealmInt>()
         for (char in this.charactersIds){
@@ -65,7 +67,6 @@ class FilmDao {
         }
         return Film(this.id,this.name,this.completeName,this.launchDate,list,this.synopsis,this.director,this.trailer,this.coverAlbum)
     }
-
 
 
 }

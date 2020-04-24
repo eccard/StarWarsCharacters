@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Charactter
@@ -48,9 +49,15 @@ class CharacterDetailFrg : Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        arguments?.let {
-            val character = it.getParcelable<Charactter>(CHARACTER_KEY)
-            binding.character = character
+        binding.lifecycleOwner = viewLifecycleOwner
+        arguments?.let { args ->
+            args.getParcelable<Charactter>(CHARACTER_KEY)?.let {
+                binding.character = it
+                viewModel.setCharacterId(it.id)
+            }
         }
+        viewModel.filmOfCharacter.observe(viewLifecycleOwner, Observer { filmsOfCharacter ->
+            binding.filmsOfCharacter = filmsOfCharacter.replace(",","\n")
+        })
     }
 }
