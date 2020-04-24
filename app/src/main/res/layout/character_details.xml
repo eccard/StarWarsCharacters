@@ -122,9 +122,11 @@
                     android:id="@+id/tv_over_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:text="@{secFilmsOfCharacter}"/>
+                    android:text="@{secFilmsOfCharacter}"
+                    android:textAlignment="center"
+                    tools:text="Star Wars: Episode IV \n A New Hope (1977)\n\n Star Wars: Episode V \n The Empire Strikes Back (1980)\n\n Star Wars: Episode VI \n Return of the Jedi (1983)\n\n"/>
 
             </LinearLayout>
         </ScrollView>

@@ -57,7 +57,7 @@ class CharacterDetailFrg : Fragment(), Injectable {
             }
         }
         viewModel.filmOfCharacter.observe(viewLifecycleOwner, Observer { filmsOfCharacter ->
-            binding.filmsOfCharacter = filmsOfCharacter.replace(",","\n")
+            binding.filmsOfCharacter = filmsOfCharacter.replace("-","\n").replace(",","\n\n")
         })
     }
 }
