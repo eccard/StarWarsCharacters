@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:background="#000000"
             android:layout_margin="8dp">
-              <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-                  android:id="@+id/playerView"
-                  android:layout_width="300dp"
-                  android:layout_height="200dp"/>
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/playerView"
+                android:layout_width="300dp"
+                android:layout_height="200dp"/>
         </FrameLayout>
 
         <include
