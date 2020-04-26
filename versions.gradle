@@ -36,7 +36,7 @@ versions.coil = "0.9.5"
 versions.pallete = "1.0.0"
 versions.liveevent = "1.2.0"
 versions.avatargenerator = "1.3"
-versions.exoplayer = "2.9.5"
+versions.androidyoutubeplayer = "10.0.5"
 
 ext.versions = versions
 
@@ -170,10 +170,7 @@ deps.liveevent = "com.github.hadilq.liveevent:liveevent:$versions.liveevent"
 
 deps.avatargenerator = "com.first.avatargenerator:AvatarImageGenerator:$versions.avatargenerator"
 
-def exoplayer = [:]
-exoplayer.core = "com.google.android.exoplayer:exoplayer-core:$versions.exoplayer"
-exoplayer.ui = "com.google.android.exoplayer:exoplayer-ui:$versions.exoplayer"
-deps.exoplayer = exoplayer
+deps.androidyoutubeplayer = "com.pierfrancescosoffritti.androidyoutubeplayer:core:$versions.androidyoutubeplayer"
 
 ext.deps = deps
 
@@ -181,6 +178,5 @@ def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    handler.maven { url 'https://jitpack.io' }
 }
 ext.addRepos = this.&addRepos
