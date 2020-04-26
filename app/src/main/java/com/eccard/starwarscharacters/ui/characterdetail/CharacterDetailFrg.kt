@@ -13,6 +13,7 @@ import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.databinding.CharacterDetailFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
+import com.eccard.starwarscharacters.util.autoCleared
 import javax.inject.Inject
 
 class CharacterDetailFrg : Fragment(), Injectable {
@@ -31,7 +32,7 @@ class CharacterDetailFrg : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 
-    lateinit var binding : CharacterDetailFrgBinding
+    private var binding by autoCleared<CharacterDetailFrgBinding>()
 
     val viewModel: CharacterDetailViewModel by viewModels {
         viewModelFactory

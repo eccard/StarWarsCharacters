@@ -19,6 +19,7 @@ import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
 import com.eccard.starwarscharacters.ui.MainActivity
 import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
+import com.eccard.starwarscharacters.util.autoCleared
 import javax.inject.Inject
 
 class HomeFrg : Fragment(), Injectable {
@@ -29,9 +30,9 @@ class HomeFrg : Fragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    lateinit var binding : HomeFrgBinding
+    private var binding by autoCleared<HomeFrgBinding>()
 
-    private lateinit var adapter: CharacterAdapter
+    private var adapter by autoCleared<CharacterAdapter>()
 
     private val viewModel: HomeViewModel by viewModels {
         viewModelFactory

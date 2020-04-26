@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Film
@@ -25,6 +24,7 @@ import com.eccard.starwarscharacters.di.Injectable
 import com.eccard.starwarscharacters.ui.MainActivity
 import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
 import com.eccard.starwarscharacters.ui.home.CharacterAdapter
+import com.eccard.starwarscharacters.util.autoCleared
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ExtractorMediaSource
@@ -58,16 +58,15 @@ class FilmDetailFrg: Fragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    private lateinit var adapter: CharacterAdapter
+    private var adapter by autoCleared<CharacterAdapter>()
 
     private val viewModel: FilmDetailViewModel by viewModels {
         viewModelFactory
     }
 
-    private var defautBgColor: Int = 0
     var fullscreen = false
     private var exoPlayer : SimpleExoPlayer? = null
-    lateinit var binding :FilmDetailFrgBinding
+    var binding by autoCleared<FilmDetailFrgBinding>()
     private var playerTimePosition: Long = 0
     private var film : Film? = null
     private var fullscreenButton : ImageView? = null
@@ -88,9 +87,6 @@ class FilmDetailFrg: Fragment(), Injectable {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val typedValue =  TypedValue()
-        val theme = activity!!.theme;
-        theme.resolveAttribute(R.attr.background, typedValue, true);
-        defautBgColor = typedValue.data;
 
         savedInstanceState?.let {
             playerTimePosition = savedInstanceState.getLong(

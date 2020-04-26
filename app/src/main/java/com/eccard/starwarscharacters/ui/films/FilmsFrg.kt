@@ -18,6 +18,7 @@ import com.eccard.starwarscharacters.databinding.FilmsFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
 import com.eccard.starwarscharacters.ui.MainActivity
 import com.eccard.starwarscharacters.ui.common.ItemOffsetDecoration
+import com.eccard.starwarscharacters.util.autoCleared
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -29,9 +30,9 @@ class FilmsFrg: Fragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    lateinit var binding : FilmsFrgBinding
+    private var binding by autoCleared<FilmsFrgBinding>()
 
-    private lateinit var adapter : FilmsAdapter
+    private var adapter by autoCleared<FilmsAdapter>()
 
     private val viewModel: FilmsViewModel by viewModels {
         viewModelFactory
