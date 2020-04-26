@@ -7,7 +7,6 @@ import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.hadilq.liveevent.LiveEvent
-import java.util.*
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(){
@@ -21,7 +20,7 @@ class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(
     }
 
     fun setQuery(originalInput: String) {
-        val input = originalInput.toLowerCase(Locale.getDefault()).trim()
+        val input = originalInput.trim()
         if (input == _query.value) {
             return
         }
