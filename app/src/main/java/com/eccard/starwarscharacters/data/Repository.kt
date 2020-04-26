@@ -1,7 +1,12 @@
 package com.eccard.starwarscharacters.data
 
+import android.content.Context
+import android.util.SparseArray
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import at.huber.youtubeExtractor.VideoMeta
+import at.huber.youtubeExtractor.YouTubeExtractor
+import at.huber.youtubeExtractor.YtFile
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.data.api.CharactterResponse
 import com.eccard.starwarscharacters.data.api.FilmRespose
@@ -24,7 +29,8 @@ class Repository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val starWarsApi: StarWarsApi,
     private val charactterDao: CharactterDao,
-    private val filmDao : FilmDao) {
+    private val filmDao : FilmDao,
+    private val context : Context) {
 
     private val charactersResult = MediatorLiveData<List<CharacterAdapterPojo>>()
     private val filmResult = MediatorLiveData<List<Film>>()
@@ -174,7 +180,37 @@ class Repository @Inject constructor(
                 checkIfCharacterInFilmAndReturnFilmName(filmDao.getAllFilms(),characterId)
             )
         }
-        return nameOfFilms as LiveData<String>
+        return nameOfFilms
     }
+
+    private val charactersInFilm = MediatorLiveData<List<CharacterAdapterPojo>>()
+    fun findCharactersInFilm(charactersIds : List<Int>) : LiveData<List<CharacterAdapterPojo>>{
+            appExecutors.diskIO().execute {
+                charactersInFilm.postValue(
+                    charactterDao.getCharacttersByIds(charactersIds).map { CharacterAdapterPojo(it,null) }
+                )
+            }
+        return charactersInFilm
+    }
+
+    private val videoUrl = MediatorLiveData<String>()
+    fun resolveVideoLink(url : String) : LiveData<String>{
+        object : YouTubeExtractor(context) {
+            override fun onExtractionComplete(
+                ytFiles: SparseArray<YtFile>?,
+                videoMeta: VideoMeta?
+            ) {
+                ytFiles?.let {
+                    val itag = 18
+                    videoUrl.postValue(ytFiles[itag].url)
+                }
+                var abc = 1
+                abc++
+            }
+
+        }.extract(url, true, false)
+        return videoUrl
+    }
+
 
 }

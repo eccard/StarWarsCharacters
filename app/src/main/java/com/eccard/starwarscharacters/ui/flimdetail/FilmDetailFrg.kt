@@ -1,38 +1,47 @@
 package com.eccard.starwarscharacters.ui.flimdetail
 
-import android.graphics.Color
+import android.app.Dialog
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
-import android.util.SparseArray
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import at.huber.youtubeExtractor.VideoMeta
-import at.huber.youtubeExtractor.YouTubeExtractor
-import at.huber.youtubeExtractor.YtFile
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.databinding.FilmDetailFrgBinding
+import com.eccard.starwarscharacters.di.Injectable
+import com.eccard.starwarscharacters.ui.MainActivity
+import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
+import com.eccard.starwarscharacters.ui.home.CharacterAdapter
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import kotlinx.android.synthetic.main.film_detail_frg.*
+import timber.log.Timber
+import javax.inject.Inject
 
 
-class FilmDetailFrg: Fragment() {
+class FilmDetailFrg: Fragment(), Injectable {
     companion object {
         private const val EXTRA_PLAYER_TIME_POSITION = "player-position-time"
+        private const val EXTRA_PLAYER_FULL_SCREEN = "player-full-screen"
         const val FILM_KEY = "FILME_KEY"
         fun newInstance ( film : Film) : FilmDetailFrg {
             val frg = FilmDetailFrg()
@@ -43,6 +52,18 @@ class FilmDetailFrg: Fragment() {
         }
     }
 
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
+
+    @Inject
+    lateinit var appExecutors: AppExecutors
+
+    private lateinit var adapter: CharacterAdapter
+
+    private val viewModel: FilmDetailViewModel by viewModels {
+        viewModelFactory
+    }
+
     private var defautBgColor: Int = 0
     var fullscreen = false
     private var exoPlayer : SimpleExoPlayer? = null
@@ -50,18 +71,21 @@ class FilmDetailFrg: Fragment() {
     private var playerTimePosition: Long = 0
     private var film : Film? = null
     private var fullscreenButton : ImageView? = null
+    private var mFullScreenDialog : Dialog? = null
+    private var playerView : PlayerView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.film_detail_frg,container,false)
-        binding.playerView?.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-//        binding.playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val typedValue =  TypedValue()
         val theme = activity!!.theme;
@@ -73,33 +97,93 @@ class FilmDetailFrg: Fragment() {
                 EXTRA_PLAYER_TIME_POSITION,
                 0L
             )
+            fullscreen = savedInstanceState.getBoolean(EXTRA_PLAYER_FULL_SCREEN)
         }
 
 
 
-        arguments?.let {
-            film = it.getParcelable<Film>(FILM_KEY)
-            binding.film = film
+        arguments?.let { args ->
+            film = args.getParcelable<Film>(FILM_KEY)
+
+            film?.let {
+                viewModel.setCharactersIds(it.charactersIds?.map { character -> character._value })
+                viewModel.setYouTubeUrl(it.trailer)
+                binding.film = film
+            }
+
+
         }
+
+        viewModel.videoUrl.observe(viewLifecycleOwner, Observer {videoLink ->
+            Timber.d("event url=$videoLink")
+            exoPlayer?.prepare(
+                buildMediaSource(Uri.parse(videoLink)),
+                false,
+                true
+            )
+        })
+
+        initRecyclerView()
     }
 
     override fun onStart() {
         super.onStart()
-        film?.let {
-            if (Util.SDK_INT > 23) {
-                setUpPlayer(it.trailer)
-            }
+        if (Util.SDK_INT > 23) {
+            setUpPlayer()
         }
 
     }
 
+    private fun initRecyclerView() {
+
+        val rvAdapter = CharacterAdapter(appExecutors = appExecutors){
+                character -> (activity as MainActivity).navigateToDetailsFrg(character.charactter)
+        }
+
+        binding.filmDetails.rvCharactersInFilm
+        binding.filmDetails.rvCharactersInFilm.adapter = rvAdapter
+        adapter = rvAdapter
+
+        binding.filmDetails.rvCharactersInFilm.addItemDecoration(SimpleDividerItemDecoration(binding.filmDetails.rvCharactersInFilm.context))
+        viewModel.characterInFilm.observe(viewLifecycleOwner, Observer { result ->
+            adapter.submitList(result)
+        })
+    }
+    private fun initFullscreenDialog() {
+        mFullScreenDialog =
+            object : Dialog(activity!!, android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+                override fun onBackPressed() {
+                    if (fullscreen) closeFullscreenDialog()
+                    super.onBackPressed()
+                }
+            }
+    }
     override fun onResume() {
         super.onResume()
-        film?.let {
-            if ((Util.SDK_INT <= 23 || exoPlayer == null)) {
-                setUpPlayer(it.trailer)
+
+        if ((Util.SDK_INT <= 23)) {
+            setUpPlayer()
+        }
+
+        if ( playerView == null ){
+            playerView = binding.playerView
+        }
+
+        if (fullscreen) {
+            playerView?.let {
+
+                (it.parent as ViewGroup).removeView(it)
+                mFullScreenDialog!!.addContentView(
+                    it,
+                    ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    )
+                )
+                mFullScreenDialog!!.show()
             }
         }
+
     }
 
     override fun onPause() {
@@ -116,88 +200,74 @@ class FilmDetailFrg: Fragment() {
         }
     }
 
-    private fun setUpPlayer(stepUrlPath: String?) {
-
-        if (!stepUrlPath.isNullOrBlank()){
-            object : YouTubeExtractor(activity!!){
-                override fun onExtractionComplete(
-                    ytFiles: SparseArray<YtFile>?,
-                    videoMeta: VideoMeta?
-                ) {
-                    ytFiles?.let {
-                        val itag = 18
-                        val downloadUrl = ytFiles[itag].url
-                        exoPlayer?.prepare(buildMediaSource(Uri.parse(downloadUrl)), false, true)
-                    }
-                    var abc= 1
-                    abc ++
-                }
-
-            }.extract(stepUrlPath,true,false)
-
+    private fun openFullscreenDialog() {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        playerView?.let{
+            (it.parent as ViewGroup).removeView(it)
+            mFullScreenDialog!!.addContentView(
+                it,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
         }
 
-        if (stepUrlPath != null && stepUrlPath.isNotEmpty()) {
+        fullscreenButton?.setImageDrawable(
+            ContextCompat.getDrawable(
+                activity!!,
+                R.drawable.ic_fullscreen_close
+            )
+        )
+        fullscreen = true
+        mFullScreenDialog?.show()
+    }
+
+    private fun closeFullscreenDialog() {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+
+        playerView?.let{
+            (it.parent as ViewGroup).removeView(it)
+
+            val params =
+                it.layoutParams as FrameLayout.LayoutParams
+            params.width = (300 * activity!!.resources.displayMetrics.density).toInt()
+            params.height = (200 * activity!!.resources.displayMetrics.density).toInt()
+            it.layoutParams = params
+
+            binding.mainMediaFrame.addView(it)
+            fullscreen = false
+            mFullScreenDialog!!.dismiss()
+        }
+
+        fullscreenButton?.setImageDrawable(
+            ContextCompat.getDrawable(
+                activity!!,
+                R.drawable.ic_fullscreen_open
+            )
+        )
+    }
+
+    private fun setUpPlayer() {
+        if (exoPlayer == null) {
             val trackSelector: TrackSelector = DefaultTrackSelector()
             exoPlayer = ExoPlayerFactory.newSimpleInstance(activity, trackSelector)
-            exoPlayer?.prepare(buildMediaSource(Uri.parse(stepUrlPath)), false, true)
             exoPlayer?.seekTo(playerTimePosition)
             exoPlayer?.playWhenReady = true
             binding.playerView.player = exoPlayer
-            R.style.AppTheme
+            binding.playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+            binding.playerView.setShowBuffering(PlayerView.SHOW_BUFFERING_ALWAYS)
             fullscreenButton = binding.playerView.findViewById(R.id.exo_fullscreen_icon)
             fullscreenButton?.setOnClickListener { setOnFulScreenClickListener() }
-
-        } else {
-            binding.playerView.visibility = View.GONE
+            initFullscreenDialog()
         }
     }
 
     fun setOnFulScreenClickListener(){
         if (fullscreen) {
-            fullscreenButton?.setImageDrawable(
-                ContextCompat.getDrawable(
-                    activity!!,
-                    R.drawable.ic_fullscreen_open
-                )
-            )
-            activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-            if (activity!!.actionBar != null) {
-                activity!!.actionBar!!.show()
-            }
-//            activity!!.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-            val params =
-                playerView.layoutParams as LinearLayout.LayoutParams
-//            params.width = ViewGroup.LayoutParams.MATCH_PARENT
-            params.width = (300 * activity!!.resources.displayMetrics.density).toInt()
-            params.height =
-                (200 * activity!!.resources.displayMetrics.density).toInt()
-            playerView.layoutParams = params
-            playerView.setBackgroundColor(defautBgColor)
-            binding.root.setBackgroundColor(defautBgColor)
-            fullscreen = false
+            closeFullscreenDialog()
         } else {
-            fullscreenButton!!.setImageDrawable(
-                ContextCompat.getDrawable(
-                    activity!!,
-                    R.drawable.ic_fullscreen_close
-                )
-            )
-            activity!!.window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-            if (activity!!.actionBar != null) {
-                activity!!.actionBar!!.hide()
-            }
-//            activity!!.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-            val params =
-                playerView.layoutParams as LinearLayout.LayoutParams
-            params.width = ViewGroup.LayoutParams.MATCH_PARENT
-            params.height = ViewGroup.LayoutParams.MATCH_PARENT
-            playerView.layoutParams = params
-            playerView.setBackgroundColor(Color.BLACK)
-            binding.root.setBackgroundColor(Color.BLACK)
-            fullscreen = true
+            openFullscreenDialog()
         }
     }
 
@@ -205,9 +275,7 @@ class FilmDetailFrg: Fragment() {
 
         return ExtractorMediaSource.Factory(
             DefaultHttpDataSourceFactory("StarWarsApp")
-//            DefaultDataSourceFactory(activity, "StarWarsApp")
-        )//.setExtractorsFactory()
-            .createMediaSource(uri)
+        ).createMediaSource(uri)
     }
 
     private fun releasePlayer() {
@@ -226,7 +294,9 @@ class FilmDetailFrg: Fragment() {
                 EXTRA_PLAYER_TIME_POSITION,
                 it.currentPosition
             )
+            outState.putBoolean(EXTRA_PLAYER_FULL_SCREEN,fullscreen)
         }
+        super.onSaveInstanceState(outState)
     }
 
 

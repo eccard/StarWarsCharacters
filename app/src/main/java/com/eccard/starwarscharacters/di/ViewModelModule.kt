@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailViewModel
 import com.eccard.starwarscharacters.ui.films.FilmsViewModel
+import com.eccard.starwarscharacters.ui.flimdetail.FilmDetailViewModel
 import com.eccard.starwarscharacters.ui.home.HomeViewModel
 import dagger.Binds
 import dagger.Module
@@ -29,6 +30,12 @@ abstract class ViewModelModule {
     @ViewModelKey(FilmsViewModel::class)
     @Singleton
     abstract fun bindFilmViewModel(viewModel: FilmsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FilmDetailViewModel::class)
+    @Singleton
+    abstract fun bindFilmDetailsViewModel(viewModel: FilmDetailViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
