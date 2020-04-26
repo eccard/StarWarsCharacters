@@ -1,12 +1,8 @@
 package com.eccard.starwarscharacters.data
 
 import android.content.Context
-import android.util.SparseArray
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import at.huber.youtubeExtractor.VideoMeta
-import at.huber.youtubeExtractor.YouTubeExtractor
-import at.huber.youtubeExtractor.YtFile
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.data.api.CharactterResponse
 import com.eccard.starwarscharacters.data.api.FilmRespose
@@ -191,25 +187,6 @@ class Repository @Inject constructor(
                 )
             }
         return charactersInFilm
-    }
-
-    private val videoUrl = MediatorLiveData<String>()
-    fun resolveVideoLink(url : String) : LiveData<String>{
-        object : YouTubeExtractor(context) {
-            override fun onExtractionComplete(
-                ytFiles: SparseArray<YtFile>?,
-                videoMeta: VideoMeta?
-            ) {
-                ytFiles?.let {
-                    val itag = 18
-                    videoUrl.postValue(ytFiles[itag].url)
-                }
-                var abc = 1
-                abc++
-            }
-
-        }.extract(url, true, false)
-        return videoUrl
     }
 
 
