@@ -73,10 +73,8 @@ dependencies {
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.java8
     implementation deps.fragment.runtime_ktx
-    implementation deps.exoplayer.core
-    implementation deps.exoplayer.ui
-    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:2.1.0'
 //    implementation deps.room.runtime
+    implementation deps.androidyoutubeplayer
 
     implementation deps.timber
 
