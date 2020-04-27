@@ -57,121 +57,98 @@ const val getCharacters = """
  			"isMain": true,
  			"name": "Anakin Skywalker, Darth Vader",
  			"image_url": "https://66.media.tumblr.com/9856bd42f18ce548f05d1c2701d298be/tumblr_pxqwf3OeH81w4t7wqo1_500.jpg",
- 			"gender": "male",
- 			"first_appearance": "Star Wars (film)"
+ 			"gender": "male"
  		},
  		{
  			"id": 2,
  			"isMain": true,
  			"name": "Ben Solo, Kylo Ren",
  			"image_url": "https://i.pinimg.com/236x/71/06/dc/7106dc5edb54d56cb15492e1772fbec5.jpg",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: The Force Awakens",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
+ 			"gender": "male"
  		},
  		{
  			"id": 3,
  			"isMain": true,
  			"name": "Obi-Wan Kenobi",
  			"image_url": "https://vignette.wikia.nocookie.net/starwars/images/4/4e/ObiWanHS-SWE.jpg/revision/latest/scale-to-width-down/500?cb=20111115052816",
- 			"gender": "male",
- 			"first_appearance": "Star Wars (film)"
+ 			"gender": "male"
  		},
  		{
  			"id": 4,
  			"isMain": true,
  			"name": "Luke Skywalker",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars (film)",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
+ 			"gender": "male"
  		},
  		{
  			"id": 5,
  			"isMain": true,
  			"name": "Leia Organa",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg",
- 			"gender": "female",
- 			"first_appearance": "Star Wars (film)",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
+ 			"gender": "female"
  		},
  		{
  			"id": 6,
  			"isMain": true,
  			"name": "Yoda",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/9/9b/Yoda_Empire_Strikes_Back.png",
- 			"gender": "male",
- 			"first_appearance": "The Empire Strikes Back",
- 			"last_appearance": ""
+ 			"gender": "male"
  		},
  		{
  			"id": 7,
  			"isMain": true,
  			"name": "R2-D2",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/3/39/R2-D2_Droid.png",
- 			"gender": "",
- 			"first_appearance": "Star Wars (film)",
- 			"last_appearance": ""
+ 			"gender": ""
  		},
  		{
  			"id": 8,
  			"isMain": true,
  			"name": "C-3PO",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/5/5c/C-3PO_droid.png",
- 			"gender": "",
- 			"first_appearance": "Star Wars (film)"
+ 			"gender": ""
  		},
  		{
  			"id": 9,
  			"isMain": true,
  			"name": "BB-8",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/3/39/BB-8%2C_Star_Wars_The_Force_Awakens.jpg",
- 			"gender": "",
- 			"first_appearance": "Star Wars: The Force Awakens"
+ 			"gender": ""
  		},
  		{
  			"id": 10,
  			"isMain": true,
  			"name": "Han Solo",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg",
- 			"gender": "male",
- 			"first_appearance": "Star Wars (film)",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
+ 			"gender": "male"
  		},
  		{
  			"id": 11,
  			"isMain": true,
  			"name": "Chewbacca",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/6/6d/Chewbacca-2-.jpg",
- 			"gender": "male",
- 			"first_appearance": "Star Wars (film)"
+ 			"gender": "male"
  		},
  		{
  			"id": 12,
  			"isMain": true,
  			"name": "Padmé Amidala",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Amidala.png/220px-Amidala.png",
- 			"gender": "female",
- 			"first_appearance": "Star Wars: Episode I – The Phantom Menace"
+ 			"gender": "female"
  		},
  		{
  			"id": 13,
  			"isMain": true,
  			"name": "Mace Windu",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/b/bf/Mace_Windu.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: Episode I – The Phantom Menace",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
+ 			"gender": "male"
  		},
  		{
  			"id": 14,
  			"isMain": true,
  			"name": "Qui-Gon Jinn",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/a/ad/Qui-Gon_Jinn.png/220px-Qui-Gon_Jinn.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: Episode I – The Phantom Menace",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
-
+ 			"gender": "male"
  		},
  		{
  			"id": 15,
@@ -185,24 +162,21 @@ const val getCharacters = """
  			"isMain": true,
  			"name": "Rose Tico",
  			"image_url": "https://pm1.narvii.com/6521/766f393132d82c1087e11e1e505ccd464b5188da_128.jpg",
- 			"gender": "female",
- 			"first_appearance": "Star Wars: The Last Jedi"
+ 			"gender": "female"
  		},
  		{
  			"id": 17,
  			"isMain": true,
  			"name": "Poe Dameron",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/0/0b/Poe_Dameron-Force_Awakens_%282015%29.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: The Force Awakens"
+ 			"gender": "male"
  		},
  		{
  			"id": 18,
  			"isMain": true,
  			"name": "Lando Calrissian",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Lando6-2.jpg/330px-Lando6-2.jpg",
- 			"gender": "male",
- 			"first_appearance": "The Empire Strikes Back"
+ 			"gender": "male"
  		},
  		{
  			"id": 19,
@@ -216,69 +190,56 @@ const val getCharacters = """
  			"isMain": true,
  			"name": "Boba Fett",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/3/3e/FettbobaJB.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars Holiday Special"
+ 			"gender": "male"
  		},
  		{
  			"id": 21,
  			"isMain": true,
  			"name": "Jabba, the Hutt",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Jabba_the_Hutt_in_Return_of_the_Jedi_%281983%29.png/330px-Jabba_the_Hutt_in_Return_of_the_Jedi_%281983%29.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars",
- 			"last_appearance": "The Clone Wars"
+ 			"gender": "male"
  		},
  		{
  			"id": 22,
  			"isMain": true,
  			"name": "Jango Fett",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/Jango_Fett.png/330px-Jango_Fett.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: Episode II – Attack of the Clones",
- 			"last_appearance": "The Clone Wars"
+ 			"gender": "male"
  		},
  		{
  			"id": 23,
  			"isMain": true,
  			"name": "Conde Dooku/Darth Tyranus",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Count_Dooku.png/330px-Count_Dooku.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: Episode II – Attack of the Clones"
+ 			"gender": "male"
  		},
  		{
  			"id": 24,
  			"isMain": true,
  			"name": "General Grievous",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/5/58/GeneralGrievous.png/220px-GeneralGrievous.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: Clone Wars ",
- 			"last_appearance": "Star Wars: Dark Disciple"
+ 			"gender": "male"
  		},
  		{
  			"id": 25,
  			"isMain": true,
  			"name": "Sheev Palpatine/Darth Sidious",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Emperor_RotJ.png/330px-Emperor_RotJ.png",
- 			"gender": "male",
- 			"first_appearance": "The Empire Strikes Back",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
-
+ 			"gender": "male"
  		},
  		{
  			"id": 26,
  			"isMain": true,
  			"name": "Finn",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/2/2a/Finn-Force_Awakens_%282015%29.png",
- 			"gender": "male",
- 			"first_appearance": "Star Wars: The Force Awakens"
+ 			"gender": "male"
  		},
  		{
  			"id": 27,
  			"isMain": true,
  			"name": "Maz Kanata",
  			"image_url": "https://pm1.narvii.com/6314/59d6b3b421a2505ba5cb3717040d6f77fcd81a5a_128.jpg",
- 			"gender": "female",
- 			"first_appearance": "Star Wars: The Force Awakens"
+ 			"gender": "female"
  		},
  		{
  			"id": 28,
@@ -292,9 +253,7 @@ const val getCharacters = """
  			"isMain": true,
  			"name": "Supreme Leader Snoke",
  			"image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4f/Snoke-The_Force_Awakens_%282015%29.png/330px-Snoke-The_Force_Awakens_%282015%29.png",
- 			"gender": "male",
- 			"first_appearance": "The Force Awaken",
- 			"last_appearance": "Star Wars: The Rise of Skywalker"
+ 			"gender": "male"
  		},
  		{
  			"id": 31,

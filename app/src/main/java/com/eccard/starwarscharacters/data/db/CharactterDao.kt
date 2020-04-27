@@ -80,6 +80,6 @@ class CharactterDao {
     }
 
     private fun Charactter.copyFromRealm(): Charactter {
-        return Charactter(this.id,this.isMain,this.name,this.imageUrl,this.gender,this.firstAppearance,this.lastAppearance)
+        return Charactter(this.id,this.isMain,this.name,this.imageUrl,this.gender)
     }
 }

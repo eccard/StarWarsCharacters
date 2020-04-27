@@ -21,11 +21,7 @@ open class Charactter(
     @field:SerializedName("image_url")
     var imageUrl : String = "",
     @field:SerializedName("gender")
-    var gender : String = "",
-    @field:SerializedName("first_appearance")
-    var firstAppearance : String? = null,
-    @field:SerializedName("last_appearance")
-    var lastAppearance : String? = null
+    var gender : String = ""
 ) : RealmModel, Parcelable
 
 
