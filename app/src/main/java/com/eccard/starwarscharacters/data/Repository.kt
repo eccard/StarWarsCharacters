@@ -11,6 +11,7 @@ import com.eccard.starwarscharacters.data.db.FilmDao
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.data.model.Film
+import com.eccard.starwarscharacters.testing.OpenForTesting
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +20,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
+@OpenForTesting
 class Repository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val starWarsApi: StarWarsApi,
