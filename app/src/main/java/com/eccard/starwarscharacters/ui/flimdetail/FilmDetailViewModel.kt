@@ -14,11 +14,7 @@ class FilmDetailViewModel @Inject constructor(private val repository: Repository
     private val _charactersIds = MutableLiveData<List<Int>>()
 
     val characterInFilm : LiveData<List<CharacterAdapterPojo>> = _charactersIds.switchMap { filmIds ->
-        if (filmIds==null){
-          AbsentLiveData.create()
-        } else {
-            repository.findCharactersInFilm(filmIds)
-        }
+        repository.findCharactersInFilm(filmIds)
     }
 
     fun setCharactersIds(charactersIds :List<Int>?){
