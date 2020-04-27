@@ -1,10 +1,12 @@
 package com.eccard.starwarscharacters.data.db
 
 import com.eccard.starwarscharacters.data.model.Charactter
+import com.eccard.starwarscharacters.testing.OpenForTesting
 import io.realm.Case
 import io.realm.Realm
 import timber.log.Timber
 
+@OpenForTesting
 class CharactterDao {
 
     fun insert(charactterList: List<Charactter>){

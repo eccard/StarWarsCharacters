@@ -61,6 +61,8 @@ deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_g
 
 deps.realm_gradle_plugin = "io.realm:realm-gradle-plugin:$versions.realm_gradle_plugin"
 
+deps.kotlin_allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+
 deps.annotations = "androidx.annotation:annotation:$versions.annotations"
 
 deps.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
