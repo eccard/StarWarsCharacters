@@ -756,7 +756,7 @@ const val getFilms = """
         "synopsis" : "Two Jedi escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.",
         "director": "George Lucas",
         "cover_album" : "https://m.media-amazon.com/images/M/MV5BYTRhNjcwNWQtMGJmMi00NmQyLWE2YzItODVmMTdjNWI0ZDA2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SY999_SX666_AL_.jpg",
-        "trailer" : "https://www.youtube.com/watch?v=UihVSUYYDTQ"
+        "trailer" : "https://www.youtube.com/watch?v=bD7bpG-zDJQ"
       },
       {
         "id": 4,
