@@ -1,6 +1,5 @@
 package com.eccard.starwarscharacters.data
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.eccard.starwarscharacters.AppExecutors
@@ -12,7 +11,6 @@ import com.eccard.starwarscharacters.data.db.FilmDao
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.data.model.Film
-import io.realm.Realm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,8 +23,7 @@ class Repository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val starWarsApi: StarWarsApi,
     private val charactterDao: CharactterDao,
-    private val filmDao : FilmDao,
-    private val context : Context) {
+    private val filmDao : FilmDao) {
 
     private val charactersResult = MediatorLiveData<List<CharacterAdapterPojo>>()
     private val filmResult = MediatorLiveData<List<Film>>()
@@ -56,7 +53,6 @@ class Repository @Inject constructor(
                     loadFilmlFromApi()
                     appExecutors.diskIO().execute {
                         charactterDao.insert(it.items)
-                        charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
                     }
 
                 }
@@ -92,10 +88,6 @@ class Repository @Inject constructor(
         if ( query.isBlank()){
             charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
         } else {
-
-            val result = Realm.getDefaultInstance().where(Charactter::class.java).contains("name","ttt")
-                .findAllAsync()
-
 
         appExecutors.diskIO().execute {
 
