@@ -53,8 +53,7 @@ class StarWarsApiTest {
         Assert.assertThat(call.body()!!.total, `is`(5))
 
         val characterAnakin = call.body()!!.items[0]
-
-        checkCharacter(characterAnakin,
+        characterAnakin.checkCharacter(
             0,
             "Anakin Skywalker, Darth Vader",
             "male",
@@ -63,7 +62,7 @@ class StarWarsApiTest {
         )
 
         val characterKylo = call.body()!!.items[1]
-        checkCharacter(characterKylo,
+        characterKylo.checkCharacter(
             2,
             "Ben Solo, Kylo Ren",
             "male",
@@ -72,7 +71,7 @@ class StarWarsApiTest {
         )
 
         val characterKenobi = call.body()!!.items[2]
-        checkCharacter(characterKenobi,
+        characterKenobi.checkCharacter(
             3,
             "Obi-Wan Kenobi",
             "male",
@@ -81,7 +80,7 @@ class StarWarsApiTest {
             )
 
         val characterLeia = call.body()!!.items[3]
-        checkCharacter(characterLeia,
+        characterLeia.checkCharacter(
             5,
             "Leia Organa",
             "female",
@@ -90,7 +89,7 @@ class StarWarsApiTest {
         )
 
         val characterAntilles = call.body()!!.items[4]
-        checkCharacter(characterAntilles,
+        characterAntilles.checkCharacter(
             35,
             "Antilles",
             "",
@@ -100,20 +99,20 @@ class StarWarsApiTest {
 
     }
 
-    private fun checkCharacter(character : Charactter,
-                               expectedId : Int,
-                               expectedName : String,
-                               expectedGender : String,
-                               expectedIsMain : Boolean,
-                               expectedImageUrl : String){
-        Assert.assertThat(character.id,`is`(expectedId))
-        Assert.assertThat(character.name, `is`(expectedName))
-        Assert.assertThat(character.gender, `is`(expectedGender))
-        Assert.assertThat(character.isMain, `is`(expectedIsMain))
-        Assert.assertThat(character.imageUrl, `is`(expectedImageUrl))
 
     }
 
+    fun Charactter.checkCharacter(expectedId : Int,
+                            expectedName : String,
+                            expectedGender : String,
+                            expectedIsMain : Boolean,
+                            expectedImageUrl : String) {
+        Assert.assertThat(this.id,`is`(expectedId))
+        Assert.assertThat(this.name, `is`(expectedName))
+        Assert.assertThat(this.gender, `is`(expectedGender))
+        Assert.assertThat(this.isMain, `is`(expectedIsMain))
+        Assert.assertThat(this.imageUrl, `is`(expectedImageUrl))
+    }
 
     private fun enqueueResponse(fileName: String, headers: Map<String, String> = emptyMap()) {
         val inputStream = javaClass.classLoader!!
