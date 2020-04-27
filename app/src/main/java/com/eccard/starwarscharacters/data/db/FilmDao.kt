@@ -3,6 +3,7 @@ package com.eccard.starwarscharacters.data.db
 import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.data.model.RealmInt
 import com.eccard.starwarscharacters.testing.OpenForTesting
+import com.eccard.starwarscharacters.util.realm.Util
 import io.realm.Case
 import io.realm.Realm
 import io.realm.RealmList
@@ -14,7 +15,7 @@ class FilmDao {
     fun insert(fimlList: List<Film>){
         var realm : Realm? = null
         try {
-            realm = Realm.getDefaultInstance()
+            realm = Util.getRealm()
             realm.executeTransaction {
                 it.copyToRealmOrUpdate(fimlList)
             }
@@ -29,7 +30,7 @@ class FilmDao {
         var filmList : List<Film>? = null
         var realm : Realm? = null
         try {
-            realm = Realm.getDefaultInstance()
+            realm = Util.getRealm()
             filmList = realm.where(Film::class.java)
                 .findAll().map {it.copyFromRealm()}
         } catch (exception : Exception){
@@ -47,7 +48,7 @@ class FilmDao {
         var realm : Realm? = null
 
         try {
-            realm = Realm.getDefaultInstance()
+            realm = Util.getRealm()
             filmList = realm.where(Film::class.java)
                 .contains("completeName",name, Case.INSENSITIVE)
                 .findAll().map { it.copyFromRealm() }
