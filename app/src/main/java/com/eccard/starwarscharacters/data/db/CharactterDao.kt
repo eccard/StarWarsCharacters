@@ -1,5 +1,6 @@
 package com.eccard.starwarscharacters.data.db
 
+import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.testing.OpenForTesting
 import com.eccard.starwarscharacters.util.realm.Util
@@ -42,6 +43,10 @@ class CharactterDao {
         return characterList ?: emptyList()
     }
 
+    fun getAllCharactersInAdapterFormat() : List<CharacterAdapterPojo>{
+        return getAllCharactters().map { CharacterAdapterPojo(it,null) }
+    }
+
     fun getCharacttersWithName(name : String) : List<Charactter>{
 
         var characterList : List<Charactter>? = null
@@ -59,6 +64,10 @@ class CharactterDao {
 
         return characterList ?: emptyList()
 
+    }
+
+    fun getCharacttersWithNameInAdapterFormat(name : String) : List<CharacterAdapterPojo>{
+        return getCharacttersWithName(name).map { CharacterAdapterPojo(it,null) }
     }
 
 
@@ -80,6 +89,10 @@ class CharactterDao {
 
         }
         return characterList ?: emptyList()
+    }
+
+    fun getCharacttersByIdsWithAdapterFormat(ids : List<Int>) :  List<CharacterAdapterPojo>{
+        return getCharacttersByIds(ids).map { CharacterAdapterPojo(it,null) }
     }
 
     private fun Charactter.copyFromRealm(): Charactter {

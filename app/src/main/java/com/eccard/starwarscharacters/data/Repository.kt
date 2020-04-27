@@ -78,20 +78,14 @@ class Repository @Inject constructor(
         })
     }
 
-    fun loadAllCharacttersFromDb(){
-        appExecutors.diskIO().execute{
-            charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
-        }
-    }
-
     fun findByNameOrFilm(query : String) : LiveData<List<CharacterAdapterPojo>>{
         if ( query.isBlank()){
-            charactersResult.postValue(charactterDao.getAllCharactters().map { CharacterAdapterPojo(it,null) })
+            charactersResult.postValue(charactterDao.getAllCharactersInAdapterFormat())
         } else {
 
         appExecutors.diskIO().execute {
 
-                val characttersFilteredByName = charactterDao.getCharacttersWithName(query)
+                val characttersFilteredByName = charactterDao.getCharacttersWithNameInAdapterFormat(query)
 
                 val films = filmDao.getFilmsFilteresbyName(query)
 
@@ -106,18 +100,16 @@ class Repository @Inject constructor(
 
                 // removing form query all characteres filteres by name
                 for(character in characttersFilteredByName){
-                    charactesrInFilms.remove(character.id)
+                    charactesrInFilms.remove(character.charactter.id)
                 }
 
                 val charactersInFilms = charactterDao.getCharacttersByIds(charactesrInFilms.toList())
 
 
-                val mutableListAdapter = characttersFilteredByName.map { CharacterAdapterPojo(it,null) }
-
                 val characterInFilmsPojo = search(films,charactersInFilms)
 
                 val mutableList = mutableListOf<CharacterAdapterPojo>()
-                mutableList.addAll(mutableListAdapter)
+                mutableList.addAll(characttersFilteredByName)
                 mutableList.addAll(characterInFilmsPojo)
 
                 charactersResult.postValue(mutableList)
@@ -175,7 +167,7 @@ class Repository @Inject constructor(
     fun findCharactersInFilm(charactersIds : List<Int>) : LiveData<List<CharacterAdapterPojo>>{
             appExecutors.diskIO().execute {
                 charactersInFilm.postValue(
-                    charactterDao.getCharacttersByIds(charactersIds).map { CharacterAdapterPojo(it,null) }
+                    charactterDao.getCharacttersByIdsWithAdapterFormat(charactersIds)
                 )
             }
         return charactersInFilm
