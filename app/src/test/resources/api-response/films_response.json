@@ -11,8 +11,6 @@
       "director" : "George Lucas",
       "cover_album" : "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,643,1000_AL_.jpg",
       "trailer" : "https://www.youtube.com/watch?v=1g3_CFmnU7k"
-
-
     },
     {
       "id": 1,
@@ -24,7 +22,6 @@
       "director": "Irvin Kershner",
       "cover_album" : "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,641,1000_AL_.jpg",
       "trailer" : "https://www.youtube.com/watch?v=JNwNXF9Y6kY"
-
     },
     {
       "id": 2,
