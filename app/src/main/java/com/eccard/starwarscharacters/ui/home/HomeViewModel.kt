@@ -1,15 +1,19 @@
 package com.eccard.starwarscharacters.ui.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
+import com.eccard.starwarscharacters.testing.OpenForTesting
+import com.eccard.starwarscharacters.util.SingleLiveEvent
 import com.hadilq.liveevent.LiveEvent
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(){
+@OpenForTesting
+class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(), Repository.SyncListener {
 
     private val _query = MutableLiveData<String>()
 
@@ -28,28 +32,34 @@ class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(
     }
 
 
-    private val _loading = LiveEvent<Boolean>()
+    private val _loading = SingleLiveEvent<Boolean>()
 
-    val loading  : LiveData<Boolean> = _loading
+    val loading  : SingleLiveEvent<Boolean> = _loading
 
     init {
         loadFromApi()
     }
 
-    private fun loadFromApi(){
-
+    // todo public only for testing
+    fun loadFromApi(){
         _loading.postValue(true)
-        repository.syncListener = object : Repository.SyncListener {
-            override fun onSynced() {
-                _loading.postValue(false)
-                setQuery("")
-            }
-        }
+        repository.syncListener = this
         repository.syncWithApi()
 
     }
 
+    override fun onSynced() {
+        _loading.postValue(false)
+        setQuery("")
+    }
+
     override fun onCleared() {
+        clear()
+    }
+
+    @VisibleForTesting
+    fun clear(){
         repository.syncListener = null
     }
+
 }
