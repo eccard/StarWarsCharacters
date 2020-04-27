@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.eccard.starwarscharacters.data.Repository
 import javax.inject.Inject
 
-class FilmsViewModel @Inject constructor(val repository: Repository) : ViewModel(){
+class FilmsViewModel @Inject constructor(repository: Repository) : ViewModel(){
     val films = repository.loadAllFilms()
 }

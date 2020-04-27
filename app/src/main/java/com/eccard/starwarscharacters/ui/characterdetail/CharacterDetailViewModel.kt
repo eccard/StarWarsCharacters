@@ -7,9 +7,9 @@ import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import javax.inject.Inject
 
-class CharacterDetailViewModel @Inject constructor(val repository: Repository) : ViewModel(){
+class CharacterDetailViewModel @Inject constructor(repository: Repository) : ViewModel(){
 
-    val _characterId = MutableLiveData<Int>()
+    private val _characterId = MutableLiveData<Int>()
 
     val filmOfCharacter : LiveData<String> = _characterId.switchMap { searchId ->
         repository.findFilmThatHasCharacter(searchId)
