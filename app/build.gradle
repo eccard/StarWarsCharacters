@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
 apply plugin: 'kotlin-allopen'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
@@ -93,6 +94,8 @@ dependencies {
     implementation deps.avatargenerator
     implementation deps.liveevent
     implementation deps.pallete
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.navigation_ui_ktx
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
@@ -117,4 +120,5 @@ dependencies {
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
+    androidTestImplementation deps.navigation.testing
 }
