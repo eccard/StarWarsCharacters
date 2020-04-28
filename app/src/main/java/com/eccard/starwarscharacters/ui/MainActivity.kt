@@ -22,35 +22,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main )
-        if ( savedInstanceState == null){
-            navigateToHome()
-        }
     }
 
-    private fun navigateToHome() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_content, HomeFrg())
-            .commit()
-    }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    fun navigateToDetailsFrg(charactter: Charactter) {
-        navigateToFrg(CharacterDetailFrg.newInstance(charactter))
-    }
-
-    fun navigateToFilmDetailFrg(film: Film) {
-        navigateToFrg(FilmDetailFrg.newInstance(film))
-    }
-
-    fun navigateToFilmFrg() {
-        navigateToFrg(FilmsFrg())
-    }
-
-    private fun navigateToFrg(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_content, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
@@ -55,7 +56,7 @@ class FilmsFrg: Fragment(), Injectable {
     private fun initRecyclerView() {
 
         val posterWidth = binding.rvFilms.context.resources.getDimension(R.dimen.img_view_film_width)
-        val display = activity!!.windowManager.defaultDisplay
+        val display = requireActivity().windowManager.defaultDisplay
         val outMetrics = DisplayMetrics()
         display.getMetrics(outMetrics)
         val screenWidth = outMetrics.widthPixels.toFloat()
@@ -65,14 +66,14 @@ class FilmsFrg: Fragment(), Injectable {
         binding.rvFilms.layoutManager = layoutManager
 
         val rvAdapter = FilmsAdapter(appExecutors = appExecutors){
-                film -> (activity as MainActivity).navigateToFilmDetailFrg(film)
+                findNavController().navigate(FilmsFrgDirections.showFilmDetail(it))
         }
         adapter = rvAdapter
         binding.rvFilms.adapter = adapter
 
         binding.rvFilms.addItemDecoration(ItemOffsetDecoration(binding.rvFilms.context,R.dimen.grid_spacing_small))
 
-        viewModel.films.observe(viewLifecycleOwner, Observer<List<Film>?> {films ->
+        viewModel.films.observe(viewLifecycleOwner, Observer{ films ->
             adapter.submitList(films)
         })
     }
