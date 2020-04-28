@@ -125,7 +125,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_over_view"
+                    android:id="@+id/tv_character_appearances_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"

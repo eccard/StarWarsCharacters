@@ -7,7 +7,7 @@
     <string name="launch_date">Launch date :</string>
     <string name="appearances">Appearances :</string>
     <string name="last_appearance">Last appearance :</string>
-    <string name="is_main">Is main :</string>
+    <string name="character_type">Type :</string>
     <string name="films">Films</string>
     <string name="film_item_poster">Film poster</string>
     <string name="title">Title :</string>

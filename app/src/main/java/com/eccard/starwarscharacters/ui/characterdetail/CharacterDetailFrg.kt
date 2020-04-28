@@ -34,7 +34,7 @@ class CharacterDetailFrg : Fragment(), Injectable {
 
     private var binding by autoCleared<CharacterDetailFrgBinding>()
 
-    val viewModel: CharacterDetailViewModel by viewModels {
+    private val viewModel: CharacterDetailViewModel by viewModels {
         viewModelFactory
     }
 
