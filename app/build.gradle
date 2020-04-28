@@ -82,8 +82,8 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.java8
-    implementation deps.fragment.runtime_ktx
     implementation deps.fragment.testing
+//    implementation deps.navigation.fragment_ktx
 //    implementation deps.room.runtime
     implementation deps.androidyoutubeplayer
 
@@ -117,5 +117,4 @@ dependencies {
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
-
 }
