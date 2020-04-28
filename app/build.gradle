@@ -20,7 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.eccard.starwarscharacters.util.StarWarsCharactersTestRunner"
     }
 
     buildTypes {
@@ -83,6 +83,7 @@ dependencies {
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.java8
     implementation deps.fragment.runtime_ktx
+    implementation deps.fragment.testing
 //    implementation deps.room.runtime
     implementation deps.androidyoutubeplayer
 
