@@ -85,7 +85,6 @@ dependencies {
     implementation deps.lifecycle.java8
     implementation deps.fragment.testing
 //    implementation deps.navigation.fragment_ktx
-//    implementation deps.room.runtime
     implementation deps.androidyoutubeplayer
 
     implementation deps.timber
@@ -99,7 +98,6 @@ dependencies {
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
-//    kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 
 
