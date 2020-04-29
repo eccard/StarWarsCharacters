@@ -25,18 +25,18 @@ android {
     }
 
     buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildTypes.each {
         def TYPE_STRING = "String"
         def VAR_NAME_BASE_URL = "BASE_URL"
         def BASE_URL = "https://starco.api"
 
-        debug {
-            buildConfigField TYPE_STRING, VAR_NAME_BASE_URL, "\"" + BASE_URL + "\""
-        }
-        release {
-            buildConfigField TYPE_STRING, VAR_NAME_BASE_URL, "\"" + BASE_URL + "\""
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+        it.buildConfigField TYPE_STRING, VAR_NAME_BASE_URL, "\"" + BASE_URL + "\""
     }
 
     compileOptions {
@@ -103,10 +103,8 @@ dependencies {
     testImplementation deps.mockito.core
     testImplementation deps.retrofit.mock
 
-    androidTestImplementation deps.atsl.core
     androidTestImplementation deps.atsl.ext_junit
     androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.atsl.rules
 
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.contrib
