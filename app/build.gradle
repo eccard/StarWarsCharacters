@@ -115,3 +115,11 @@ dependencies {
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
 }
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
