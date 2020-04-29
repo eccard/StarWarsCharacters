@@ -48,7 +48,7 @@ class StarWarsApiTest {
         val call = starWarsApi.getCaracters().execute()
 
         val request = mockWebServer.takeRequest()
-        Assert.assertThat(request.path, `is`("/"+Constants.CHARACTER))
+        Assert.assertThat(request.path, `is`("/"+Constants.API_CHARACTER))
 
         Assert.assertThat<CharactterResponse>(call.body(), IsNull.notNullValue())
         Assert.assertThat(call.body()!!.total, `is`(5))
@@ -105,7 +105,7 @@ class StarWarsApiTest {
         enqueueResponse("films_response.json")
         val call = starWarsApi.getFilms().execute()
         val request = mockWebServer.takeRequest()
-        Assert.assertThat(request.path, `is`("/"+Constants.FILMS))
+        Assert.assertThat(request.path, `is`("/"+Constants.API_FILMS))
 
         Assert.assertThat<FilmRespose>(call.body(), IsNull.notNullValue())
         Assert.assertThat(call.body()!!.total, `is`(3))
