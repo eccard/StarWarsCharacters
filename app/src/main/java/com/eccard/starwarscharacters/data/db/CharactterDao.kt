@@ -19,8 +19,8 @@ class CharactterDao {
                 it.copyToRealmOrUpdate(charactterList)
             }
 
-        } catch (exeption : Exception){
-            Timber.e(exeption)
+        } catch (exception : Exception){
+            Timber.e(exception)
         }finally {
             realm?.close()
         }
@@ -32,10 +32,11 @@ class CharactterDao {
         var realm : Realm? = null
         try {
             realm = Util.getRealm()
-            characterList = realm.where(Charactter::class.java)
-                .findAll().map { it.copyFromRealm() }
-        } catch (exeption : Exception){
-            Timber.e(exeption)
+            characterList = realm.copyFromRealm(
+                realm.where(Charactter::class.java)
+                    .findAll())
+        } catch (exception : Exception){
+            Timber.e(exception)
         }finally {
             realm?.close()
         }
@@ -53,11 +54,11 @@ class CharactterDao {
         var realm : Realm? = null
         try {
             realm = Util.getRealm()
-            characterList = realm.where(Charactter::class.java)
+            characterList = realm.copyFromRealm(realm.where(Charactter::class.java)
                 .contains("name",name, Case.INSENSITIVE)
-                .findAll().map { it.copyFromRealm() }
-        } catch (exeption : Exception){
-            Timber.e(exeption)
+                .findAll())
+        } catch (exception : Exception){
+            Timber.e(exception)
         }finally {
             realm?.close()
         }
@@ -78,9 +79,9 @@ class CharactterDao {
             var realm : Realm? = null
             try {
                 realm = Util.getRealm()
-                characterList = realm.where(Charactter::class.java)
+                characterList = realm.copyFromRealm(realm.where(Charactter::class.java)
                     .`in`("id",ids.toTypedArray())
-                    .findAll().map{it.copyFromRealm()}
+                    .findAll())
             } catch (exeption : Exception){
                 Timber.e(exeption)
             }finally {
@@ -95,7 +96,4 @@ class CharactterDao {
         return getCharacttersByIds(ids).map { CharacterAdapterPojo(it,null) }
     }
 
-    private fun Charactter.copyFromRealm(): Charactter {
-        return Charactter(this.id,this.isMain,this.name,this.imageUrl,this.gender)
-    }
 }

@@ -10,15 +10,15 @@ import timber.log.Timber
 @OpenForTesting
 class FilmDao {
 
-    fun insert(fimlList: List<Film>){
+    fun insert(filmList: List<Film>){
         var realm : Realm? = null
         try {
             realm = Util.getRealm()
             realm.executeTransaction {
-                it.copyToRealmOrUpdate(fimlList)
+                it.copyToRealmOrUpdate(filmList)
             }
-        } catch (exeption : Exception){
-            Timber.e(exeption)
+        } catch (exception : Exception){
+            Timber.e(exception)
         }finally {
             realm?.close()
         }
@@ -29,8 +29,8 @@ class FilmDao {
         var realm : Realm? = null
         try {
             realm = Util.getRealm()
-            filmList = realm.where(Film::class.java)
-                .findAll().map {it.copyFromRealm()}
+            filmList = realm.copyFromRealm(realm.where(Film::class.java)
+                    .findAll())
         } catch (exception : Exception){
                 Timber.e(exception)
         }finally {
@@ -40,16 +40,16 @@ class FilmDao {
         return filmList ?: emptyList()
     }
 
-    fun getFilmsFilteresbyName(name : String) : List<Film>{
+    fun getFilmsFilteredByName(name : String) : List<Film>{
 
         var filmList : List<Film>? = null
         var realm : Realm? = null
 
         try {
             realm = Util.getRealm()
-            filmList = realm.where(Film::class.java)
+            filmList = realm.copyFromRealm(realm.where(Film::class.java)
                 .contains("completeName",name, Case.INSENSITIVE)
-                .findAll().map { it.copyFromRealm() }
+                .findAll())
         } catch (exception : Exception){
             Timber.e(exception)
         }finally {
@@ -58,17 +58,6 @@ class FilmDao {
 
         return filmList ?: emptyList()
     }
-
-
-
-    private fun Film.copyFromRealm(): Film {
-        val list = RealmList<RealmInt>()
-        for (char in this.charactersIds){
-            list.add(RealmInt(char._value))
-        }
-        return Film(this.id,this.name,this.completeName,this.launchDate,list,this.synopsis,this.director,this.trailer,this.coverAlbum)
-    }
-
 
 }
 
