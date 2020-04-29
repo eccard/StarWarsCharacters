@@ -1,4 +1,4 @@
-package com.eccard.starwarscharacters.data.model
+package com.eccard.starwarscharacters.util.realm
 
 import android.os.Parcelable
 import io.realm.RealmModel

@@ -3,6 +3,7 @@ package com.eccard.starwarscharacters.data.model
 import android.os.Parcelable
 import com.eccard.starwarscharacters.util.realm.IntListTypeAdapter
 import com.eccard.starwarscharacters.util.realm.IntRealmListParceler
+import com.eccard.starwarscharacters.util.realm.RealmInt
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmList

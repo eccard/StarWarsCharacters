@@ -3,7 +3,6 @@ package com.eccard.starwarscharacters.util.realm
 import android.os.Parcel
 import android.os.Parcelable
 import com.eccard.starwarscharacters.data.model.Film
-import com.eccard.starwarscharacters.data.model.RealmInt
 import io.realm.RealmList
 import io.realm.RealmModel
 import kotlinx.android.parcel.Parceler

@@ -1,12 +1,10 @@
 package com.eccard.starwarscharacters.data.db
 
 import com.eccard.starwarscharacters.data.model.Film
-import com.eccard.starwarscharacters.data.model.RealmInt
 import com.eccard.starwarscharacters.testing.OpenForTesting
 import com.eccard.starwarscharacters.util.realm.Util
 import io.realm.Case
 import io.realm.Realm
-import io.realm.RealmList
 import timber.log.Timber
 
 @OpenForTesting
