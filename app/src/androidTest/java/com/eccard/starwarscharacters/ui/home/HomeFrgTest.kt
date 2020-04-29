@@ -3,6 +3,8 @@ package com.eccard.starwarscharacters.ui.home
 import android.view.KeyEvent
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
@@ -41,6 +43,7 @@ class HomeFrgTest {
     private lateinit var viewModel: HomeViewModel
     private val results = MutableLiveData<List<CharacterAdapterPojo>>()
     private val loading = SingleLiveEvent<Boolean>()
+    private val navController = mock(NavController::class.java)
 
     @Before
     fun setUp() {
@@ -58,6 +61,9 @@ class HomeFrgTest {
         }
         dataBindingIdlingResourceRule.monitorFragment(scenario)
 
+        scenario.onFragment { fragment ->
+            Navigation.setViewNavController(fragment.requireView(),navController)
+        }
     }
 
     @Test
@@ -102,8 +108,17 @@ class HomeFrgTest {
         )
 
         verify(viewModel).setQuery(query)
-
     }
 
+    @Test
+    fun navigateToCharacter(){
+        loading.postValue(false)
+        val charsList = getCharacterResponse().items.map { CharacterAdapterPojo(it,null) }
+        results.postValue(charsList)
+        Espresso.onView(ViewMatchers.withText(charsList[0].charactter.name)).perform(ViewActions.click())
+        verify(navController).navigate(
+            HomeFrgDirections.showCharacterDetail(charsList[0].charactter)
+        )
+    }
 
 }
