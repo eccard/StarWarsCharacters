@@ -91,7 +91,7 @@ class RepositoryTest {
         val characterInAdapterFormat =  getCharacterResponse().items.map { CharacterAdapterPojo(it,null)}
 
         `when`(charactterDao.getCharacttersWithNameInAdapterFormat(query)).thenReturn(characterInAdapterFormat)
-        `when`(filmDao.getFilmsFilteresbyName(query)).thenReturn(getFilmResponse().items)
+        `when`(filmDao.getFilmsFilteredByName(query)).thenReturn(getFilmResponse().items)
 
 
         val listOfCharacersInFilm = getCharacterThatIsInFilm()
@@ -129,7 +129,7 @@ class RepositoryTest {
         MatcherAssert.assertThat(characterFilteres.value[4].charactter.name, `is`("Boba Fett"))
 
         verify(charactterDao).getCharacttersWithNameInAdapterFormat(query)
-        verify(filmDao).getFilmsFilteresbyName(query)
+        verify(filmDao).getFilmsFilteredByName(query)
 
 
 

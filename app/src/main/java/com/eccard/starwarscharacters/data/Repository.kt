@@ -89,7 +89,7 @@ class Repository @Inject constructor(
 
                 val characttersFilteredByName = charactterDao.getCharacttersWithNameInAdapterFormat(query)
 
-                val films = filmDao.getFilmsFilteresbyName(query)
+                val films = filmDao.getFilmsFilteredByName(query)
 
                 val charactesrInFilms = HashSet<Int>()
 
