@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
+import com.eccard.starwarscharacters.testing.OpenForTesting
 import com.eccard.starwarscharacters.util.AbsentLiveData
 import javax.inject.Inject
 
+@OpenForTesting
 class FilmDetailViewModel @Inject constructor(private val repository: Repository) : ViewModel(){
 
     private val _charactersIds = MutableLiveData<List<Int>>()

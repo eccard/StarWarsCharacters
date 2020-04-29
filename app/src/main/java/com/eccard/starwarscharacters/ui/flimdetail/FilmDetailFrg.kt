@@ -18,11 +18,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.databinding.FilmDetailFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.ui.MainActivity
-import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrgArgs
 import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
 import com.eccard.starwarscharacters.ui.home.CharacterAdapter
 import com.eccard.starwarscharacters.util.autoCleared
