@@ -6,7 +6,6 @@
     <string name="gender">Gender :</string>
     <string name="launch_date">Launch date :</string>
     <string name="appearances">Appearances :</string>
-    <string name="last_appearance">Last appearance :</string>
     <string name="character_type">Type :</string>
     <string name="films">Films</string>
     <string name="film_item_poster">Film poster</string>
@@ -17,4 +16,5 @@
     <string name="main_character">Is main character</string>
     <string name="support_character">Is support character</string>
     <string name="characters_in_film">Characters</string>
+    <string name="description_character_image">character picture</string>
 </resources>

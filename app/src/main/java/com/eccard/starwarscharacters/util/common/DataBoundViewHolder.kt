@@ -1,4 +1,4 @@
-package com.eccard.starwarscharacters.ui.common
+package com.eccard.starwarscharacters.util.common
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

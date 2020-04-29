@@ -151,7 +151,7 @@ class StarWarsApiTest {
 
     }
 
-    fun Film.checkInfos(expectedId : Int,
+    private fun Film.checkInfos(expectedId : Int,
                         expectedName : String,
                         expectedCompleteName : String,
                         expectedLaunchDate : String,
@@ -176,7 +176,7 @@ class StarWarsApiTest {
         }
     }
 
-    fun Charactter.checkCharacter(expectedId : Int,
+    private fun Charactter.checkCharacter(expectedId : Int,
                             expectedName : String,
                             expectedGender : String,
                             expectedIsMain : Boolean,

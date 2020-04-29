@@ -4,17 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.eccard.starwarscharacters.data.Repository
-import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
-import com.eccard.starwarscharacters.ui.films.FilmsViewModel
 import com.eccard.starwarscharacters.util.mock
 import org.junit.Before
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 

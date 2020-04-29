@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.data.model.Charactter
 import com.eccard.starwarscharacters.databinding.CharacterDetailFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
 import com.eccard.starwarscharacters.util.autoCleared

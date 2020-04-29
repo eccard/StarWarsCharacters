@@ -9,7 +9,6 @@ import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.testing.OpenForTesting
 import com.eccard.starwarscharacters.util.SingleLiveEvent
-import com.hadilq.liveevent.LiveEvent
 import javax.inject.Inject
 
 @OpenForTesting

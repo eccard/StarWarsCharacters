@@ -8,7 +8,7 @@ import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.databinding.CharacterItemBinding
-import com.eccard.starwarscharacters.ui.common.DataBoundListAdapter
+import com.eccard.starwarscharacters.util.common.DataBoundListAdapter
 
 class CharacterAdapter (appExecutors: AppExecutors,
                         private val characterClickCallback: ((CharacterAdapterPojo) -> Unit)?) :

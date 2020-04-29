@@ -10,19 +10,12 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.api.FilmRespose
-import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Film
-import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailViewModel
-import com.eccard.starwarscharacters.ui.home.HomeFrg
-import com.eccard.starwarscharacters.ui.home.HomeFrgDirections
 import com.eccard.starwarscharacters.util.*
-import com.eccard.starwarscharacters.util.com.eccard.starwarscharacters.util.getCharacterResponse
-import com.eccard.starwarscharacters.util.com.eccard.starwarscharacters.util.getFilmResponse
 import com.google.gson.Gson
 import org.hamcrest.CoreMatchers.not
 import org.junit.Before
 
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito

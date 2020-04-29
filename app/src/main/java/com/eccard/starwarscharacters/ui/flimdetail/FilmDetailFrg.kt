@@ -20,13 +20,12 @@ import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.databinding.FilmDetailFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
+import com.eccard.starwarscharacters.util.common.SimpleDividerItemDecoration
 import com.eccard.starwarscharacters.ui.home.CharacterAdapter
 import com.eccard.starwarscharacters.util.autoCleared
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.android.synthetic.main.film_detail_frg.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -175,7 +174,7 @@ class FilmDetailFrg: Fragment(), Injectable {
     private fun setUpPlayer() {
         if (!initializedPlayer) {
 
-            val view  = binding.playerView as YouTubePlayerView
+            val view  = binding.playerView
             viewLifecycleOwner.lifecycle.addObserver(view)
 
             val youTubeId = params.film.trailer.substring(params.film.trailer.indexOf("=") +1)
@@ -246,7 +245,7 @@ class FilmDetailFrg: Fragment(), Injectable {
         }
     }
 
-    fun setOnFulScreenClickListener(){
+    private fun setOnFulScreenClickListener(){
         if (fullscreen) {
             closeFullscreenDialog()
         } else {

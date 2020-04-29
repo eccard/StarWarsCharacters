@@ -1,4 +1,4 @@
-package com.eccard.starwarscharacters.ui.common
+package com.eccard.starwarscharacters.util.common
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding

@@ -13,7 +13,7 @@ import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.databinding.FilmItemBinding
-import com.eccard.starwarscharacters.ui.common.DataBoundListAdapter
+import com.eccard.starwarscharacters.util.common.DataBoundListAdapter
 
 
 class FilmsAdapter (appExecutors: AppExecutors,

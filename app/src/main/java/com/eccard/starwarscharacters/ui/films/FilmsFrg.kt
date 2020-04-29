@@ -14,11 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.data.model.Film
 import com.eccard.starwarscharacters.databinding.FilmsFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.ui.MainActivity
-import com.eccard.starwarscharacters.ui.common.ItemOffsetDecoration
+import com.eccard.starwarscharacters.util.common.ItemOffsetDecoration
 import com.eccard.starwarscharacters.util.autoCleared
 import javax.inject.Inject
 import kotlin.math.roundToInt

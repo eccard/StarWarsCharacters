@@ -27,7 +27,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun TestQuery() {
+    fun testQuery() {
         val query = "ana"
         val result = mock<Observer<List<CharacterAdapterPojo>>>()
         viewModel.results.observeForever(result)

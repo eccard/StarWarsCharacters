@@ -18,9 +18,7 @@ import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.ui.MainActivity
-import com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrg
-import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
+import com.eccard.starwarscharacters.util.common.SimpleDividerItemDecoration
 import com.eccard.starwarscharacters.util.autoCleared
 import javax.inject.Inject
 
@@ -121,7 +119,7 @@ class HomeFrg : Fragment(), Injectable {
                 false
             }
         }
-        binding.input.setOnKeyListener { view: View, keyCode: Int, event: KeyEvent ->
+        binding.input.setOnKeyListener { view: View, _: Int, event: KeyEvent ->
 //            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
             if (event.action == KeyEvent.ACTION_UP ) {
                 doSearch(view)

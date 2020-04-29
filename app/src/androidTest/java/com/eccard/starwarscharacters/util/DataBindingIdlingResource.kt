@@ -74,7 +74,7 @@ class DataBindingIdlingResource : IdlingResource {
         lateinit var bindings: List<ViewDataBinding>
         scenario.onFragment {  fragment ->
             bindings = fragment.requireView().flattenHierarchy().mapNotNull { view ->
-                DataBindingUtil.getBinding<ViewDataBinding>(view)
+                DataBindingUtil.getBinding(view)
             }
         }
         return bindings

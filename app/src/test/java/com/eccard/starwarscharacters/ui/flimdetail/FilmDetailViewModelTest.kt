@@ -1,20 +1,15 @@
 package com.eccard.starwarscharacters.ui.flimdetail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
-import com.eccard.starwarscharacters.ui.home.HomeViewModel
-import com.eccard.starwarscharacters.util.AbsentLiveData
 import com.eccard.starwarscharacters.util.getCharacterResponse
 import com.eccard.starwarscharacters.util.mock
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.any

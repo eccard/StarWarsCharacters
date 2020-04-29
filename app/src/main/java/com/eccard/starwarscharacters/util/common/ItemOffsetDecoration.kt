@@ -1,4 +1,4 @@
-package com.eccard.starwarscharacters.ui.common
+package com.eccard.starwarscharacters.util.common
 
 import android.content.Context
 import android.graphics.Rect

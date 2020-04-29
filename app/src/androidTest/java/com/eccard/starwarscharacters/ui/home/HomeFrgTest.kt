@@ -14,7 +14,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.util.*
-import com.eccard.starwarscharacters.util.com.eccard.starwarscharacters.util.getCharacterResponse
+import com.eccard.starwarscharacters.util.getCharacterResponse
 import org.hamcrest.CoreMatchers.not
 import org.junit.Before
 
@@ -91,7 +91,8 @@ class HomeFrgTest {
         loading.postValue(false)
         results.postValue(getCharacterResponse().items.map { CharacterAdapterPojo(it,null) })
         Espresso.onView(RecyclerViewMatcher(R.id.character_list).atPosition(0))
-            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(getCharacterResponse().items[0].name))))
+            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(
+                getCharacterResponse().items[0].name))))
     }
 
     @Test
@@ -99,7 +100,8 @@ class HomeFrgTest {
         loading.postValue(false)
         results.postValue(getCharacterResponse().items.map { CharacterAdapterPojo(it,null) })
         Espresso.onView(RecyclerViewMatcher(R.id.character_list).atPosition(0))
-            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(getCharacterResponse().items[0].name))))
+            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(
+                getCharacterResponse().items[0].name))))
 
         val query = "anakin"
         Espresso.onView(withId(R.id.input)).perform(

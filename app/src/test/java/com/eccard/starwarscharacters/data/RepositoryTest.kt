@@ -7,7 +7,12 @@ import com.eccard.starwarscharacters.data.db.CharactterDao
 import com.eccard.starwarscharacters.data.db.FilmDao
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
 import com.eccard.starwarscharacters.data.model.Film
-import com.eccard.starwarscharacters.util.*
+import com.eccard.starwarscharacters.util.InstantAppExecutors
+import com.eccard.starwarscharacters.util.argumentCaptor
+import com.eccard.starwarscharacters.util.getCharacterResponse
+import com.eccard.starwarscharacters.util.getCharacterThatIsInFilm
+import com.eccard.starwarscharacters.util.getFilmResponse
+import com.eccard.starwarscharacters.util.mock
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert
 import org.hamcrest.core.IsNull

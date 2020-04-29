@@ -1,24 +1,20 @@
 package com.eccard.starwarscharacters.ui.characterdetail
 
 import android.content.Context
-import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.MutableLiveData
-import androidx.test.InstrumentationRegistry.getTargetContext
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.util.CountingAppExecutorsRule
 import com.eccard.starwarscharacters.util.DataBindingIdlingResourceRule
 import com.eccard.starwarscharacters.util.TaskExecutorWithIdlingResourceRule
 import com.eccard.starwarscharacters.util.ViewModelUtil
-import com.eccard.starwarscharacters.util.com.eccard.starwarscharacters.util.getCharacterResponse
-import com.eccard.starwarscharacters.util.com.eccard.starwarscharacters.util.getFilmResponse
+import com.eccard.starwarscharacters.util.getCharacterResponse
+import com.eccard.starwarscharacters.util.getFilmResponse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
