@@ -1,4 +1,4 @@
-package com.eccard.starwarscharacters.util.com.eccard.starwarscharacters.util
+package com.eccard.starwarscharacters.util
 
 import com.eccard.starwarscharacters.data.api.CharactterResponse
 import com.eccard.starwarscharacters.data.api.FilmRespose
