@@ -35,10 +35,6 @@ class CharacterDetailFrgTest {
 
     @Rule
     @JvmField
-    val countingAppExecutors = CountingAppExecutorsRule()
-
-    @Rule
-    @JvmField
     val dataBindingIdlingResourceRule = DataBindingIdlingResourceRule()
 
     private lateinit var viewModel: CharacterDetailViewModel
@@ -49,11 +45,9 @@ class CharacterDetailFrgTest {
     fun setUp() {
         viewModel = mock(CharacterDetailViewModel::class.java)
         Mockito.`when`(viewModel.filmOfCharacter).thenReturn(results)
-        val args = Bundle()
-        args.putParcelable(CharacterDetailFrg.CHARACTER_KEY,characterAnakin)
 
         val scenario = launchFragmentInContainer(
-            fragmentArgs = args,
+            CharacterDetailFrgArgs(characterAnakin).toBundle(),
             themeResId = R.style.AppTheme) {
             CharacterDetailFrg().apply {
                 viewModelFactory = ViewModelUtil.createFor(viewModel)
