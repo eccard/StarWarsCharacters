@@ -87,7 +87,6 @@ dependencies {
 
     implementation deps.coil
     implementation deps.avatargenerator
-    implementation deps.liveevent
     implementation deps.pallete
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.navigation_ui_ktx
