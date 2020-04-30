@@ -17,4 +17,6 @@
     <string name="support_character">Is support character</string>
     <string name="characters_in_film">Characters</string>
     <string name="description_character_image">character picture</string>
+    <string name="height">Height :</string>
+    <string name="mass">Mass :</string>
 </resources>

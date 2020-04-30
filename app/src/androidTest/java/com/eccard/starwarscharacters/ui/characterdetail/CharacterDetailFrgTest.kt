@@ -10,11 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.util.DataBindingIdlingResourceRule
-import com.eccard.starwarscharacters.util.TaskExecutorWithIdlingResourceRule
-import com.eccard.starwarscharacters.util.ViewModelUtil
-import com.eccard.starwarscharacters.util.getCharacterResponse
-import com.eccard.starwarscharacters.util.getFilmResponse
+import com.eccard.starwarscharacters.util.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -68,6 +64,12 @@ class CharacterDetailFrgTest {
 
         Espresso.onView(ViewMatchers.withId(R.id.tv_character_gender))
             .check(ViewAssertions.matches(ViewMatchers.withText(characterAnakin.gender)))
+
+        Espresso.onView(ViewMatchers.withId(R.id.tv_character_height))
+            .check(ViewAssertions.matches(ViewMatchers.withText(characterAnakin.height)))
+
+        Espresso.onView(ViewMatchers.withId(R.id.tv_character_mass))
+            .check(ViewAssertions.matches(ViewMatchers.withText(characterAnakin.mass)))
 
         val appearances = getFilmResponse().items[0].completeName
         results.postValue(appearances)

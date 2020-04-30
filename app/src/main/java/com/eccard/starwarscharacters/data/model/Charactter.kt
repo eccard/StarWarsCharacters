@@ -21,7 +21,11 @@ open class Charactter(
     @field:SerializedName("image_url")
     var imageUrl : String = "",
     @field:SerializedName("gender")
-    var gender : String = ""
+    var gender : String = "",
+    @field:SerializedName("height")
+    var height : String = "",
+    @field:SerializedName("mass")
+    var mass : String = ""
 ) : RealmModel, Parcelable
 
 
