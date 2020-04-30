@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(
         loadFromApi()
     }
 
-    // todo public only for testing
+    @VisibleForTesting
     fun loadFromApi(){
         _loading.postValue(true)
         repository.syncListener = this

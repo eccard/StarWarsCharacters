@@ -3,8 +3,6 @@ package com.eccard.starwarscharacters.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.os.IBinder
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -18,8 +16,8 @@ import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.util.common.SimpleDividerItemDecoration
 import com.eccard.starwarscharacters.util.autoCleared
+import com.eccard.starwarscharacters.util.common.SimpleDividerItemDecoration
 import javax.inject.Inject
 
 class HomeFrg : Fragment(), Injectable {
@@ -96,21 +94,7 @@ class HomeFrg : Fragment(), Injectable {
     }
 
 
-    // todo se for ficar abaixo com action up não precisa dessesky
     private fun initSearchInputListener() {
-
-        binding.input.addTextChangedListener(object :TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                doSearch(binding.input,false)
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-
         binding.input.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 doSearch(view)
@@ -119,9 +103,8 @@ class HomeFrg : Fragment(), Injectable {
                 false
             }
         }
-        binding.input.setOnKeyListener { view: View, _: Int, event: KeyEvent ->
-//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-            if (event.action == KeyEvent.ACTION_UP ) {
+        binding.input.setOnKeyListener { view: View, keyCode: Int, event: KeyEvent ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 doSearch(view)
                 true
             } else {
