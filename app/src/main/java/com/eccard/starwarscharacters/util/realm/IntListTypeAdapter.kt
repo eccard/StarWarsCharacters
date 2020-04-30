@@ -4,10 +4,11 @@ import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 import io.realm.RealmList
+import timber.log.Timber
 
 class IntListTypeAdapter : TypeAdapter<RealmList<RealmInt>>() {
     override fun write(out: JsonWriter?, value: RealmList<RealmInt>?) {
-        TODO("Not yet implemented")
+        Timber.e("IntListTypeAdapter write note implemented")
     }
 
     override fun read(input: JsonReader?): RealmList<RealmInt> {
