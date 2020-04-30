@@ -1,24 +1,63 @@
 package com.eccard.starwarscharacters.data.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.eccard.starwarscharacters.data.model.Film
+import com.eccard.starwarscharacters.testing.OpenForTesting
+import com.eccard.starwarscharacters.util.realm.Util
+import io.realm.Case
+import io.realm.Realm
+import timber.log.Timber
 
-@Dao
-interface FilmDao {
+@OpenForTesting
+class FilmDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(fiml: Film)
+    fun insert(filmList: List<Film>){
+        var realm : Realm? = null
+        try {
+            realm = Util.getRealm()
+            realm.executeTransaction {
+                it.copyToRealmOrUpdate(filmList)
+            }
+        } catch (exception : Exception){
+            Timber.e(exception)
+        }finally {
+            realm?.close()
+        }
+    }
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(fimlList: List<Film>)
+    fun getAllFilms() : List<Film>{
+        var filmList : List<Film>? = null
+        var realm : Realm? = null
+        try {
+            realm = Util.getRealm()
+            filmList = realm.copyFromRealm(realm.where(Film::class.java)
+                    .findAll())
+        } catch (exception : Exception){
+                Timber.e(exception)
+        }finally {
+            realm?.close()
+        }
 
-    @Query("SELECT * FROM  film")
-    fun getAllFilms() : List<Film>
+        return filmList ?: emptyList()
+    }
 
-    @Query("SELECT * FROM film WHERE completeName LIKE '%' || :name || '%'")
-    fun getFilmsFilteresbyName(name : String) : List<Film>
+    fun getFilmsFilteredByName(name : String) : List<Film>{
+
+        var filmList : List<Film>? = null
+        var realm : Realm? = null
+
+        try {
+            realm = Util.getRealm()
+            filmList = realm.copyFromRealm(realm.where(Film::class.java)
+                .contains("completeName",name, Case.INSENSITIVE)
+                .findAll())
+        } catch (exception : Exception){
+            Timber.e(exception)
+        }finally {
+            realm?.close()
+        }
+
+        return filmList ?: emptyList()
+    }
 
 }
+

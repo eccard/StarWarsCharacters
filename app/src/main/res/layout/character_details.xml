@@ -4,6 +4,9 @@
         <variable
             name="secCharacter"
             type="com.eccard.starwarscharacters.data.model.Charactter" />
+        <variable
+            name="secFilmsOfCharacter"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,6 +45,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_character_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -61,18 +65,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/is_main"
+                        android:text="@string/character_type"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold"
                         />
 
                     <TextView
+                        android:id="@+id/tv_character_main"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:text="@{String.valueOf(secCharacter.main)}"
+                        android:text="@{ secCharacter.main ? @string/main_character :  @string/main_character}"
                         tools:text="olasfsafas"/>
 
                 </TableRow>
@@ -94,13 +99,14 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_character_gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:text="@{secCharacter.gender}"
-                        tools:text="aflkjaskfasdfasdfasd"/>
+                        tools:text="male"/>
                 </TableRow>
 
                 <TableRow
@@ -114,18 +120,20 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold"
-                        android:text="@string/first_appearance"
+                        android:text="@string/height"
+
                         />
 
                     <TextView
+                        android:id="@+id/tv_character_height"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:text="@{secCharacter.firstAppearance}"/>
+                        android:text="@{secCharacter.height}"
+                        tools:text="male"/>
                 </TableRow>
-
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -138,17 +146,42 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold"
-                        android:text="@string/last_appearance"
+                        android:text="@string/mass"
+
                         />
 
                     <TextView
+                        android:id="@+id/tv_character_mass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:text="@{secCharacter.lastAppearance}"/>
+                        android:text="@{secCharacter.mass}"
+                        tools:text="male"/>
                 </TableRow>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textStyle="bold"
+                    android:text="@string/appearances"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_character_appearances_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:text="@{secFilmsOfCharacter}"
+                    android:textAlignment="center"
+                    tools:text="Star Wars: Episode IV \n A New Hope (1977)\n\n Star Wars: Episode V \n The Empire Strikes Back (1980)\n\n Star Wars: Episode VI \n Return of the Jedi (1983)\n\n"/>
 
             </LinearLayout>
         </ScrollView>

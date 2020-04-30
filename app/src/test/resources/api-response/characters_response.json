@@ -1,0 +1,39 @@
+{
+  "total_count": 5,
+  "items": [{
+    "id": 0,
+    "isMain": true,
+    "name": "Anakin Skywalker, Darth Vader",
+    "image_url": "https://66.media.tumblr.com/9856bd42f18ce548f05d1c2701d298be/tumblr_pxqwf3OeH81w4t7wqo1_500.jpg",
+    "gender": "male"
+  },
+    {
+      "id": 2,
+      "isMain": true,
+      "name": "Ben Solo, Kylo Ren",
+      "image_url": "https://i.pinimg.com/236x/71/06/dc/7106dc5edb54d56cb15492e1772fbec5.jpg",
+      "gender": "male"
+    },
+    {
+      "id": 3,
+      "isMain": true,
+      "name": "Obi-Wan Kenobi",
+      "image_url": "https://vignette.wikia.nocookie.net/starwars/images/4/4e/ObiWanHS-SWE.jpg/revision/latest/scale-to-width-down/500?cb=20111115052816",
+      "gender": "male"
+    },
+    {
+      "id": 5,
+      "isMain": true,
+      "name": "Leia Organa",
+      "image_url": "https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg",
+      "gender": "female"
+    },
+    {
+      "id": 35,
+      "isMain": false,
+      "name": "Antilles",
+      "image_url": "",
+      "gender": ""
+    }
+  ]
+}

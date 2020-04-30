@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.eccard.starwarscharacters.ui.home.HomeFrg"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/showCharacterDetail"
+            app:destination="@id/characterDetail"/>
+        <action
+            android:id="@+id/showFilms"
+            app:destination="@id/filmFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetail"
+        android:name="com.eccard.starwarscharacters.ui.characterdetail.CharacterDetailFrg"
+        android:label="CharacterDetail" >
+        <argument
+            android:name="character"
+            app:argType="com.eccard.starwarscharacters.data.model.Charactter"
+            app:nullable="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/filmFragment"
+        android:name="com.eccard.starwarscharacters.ui.films.FilmsFrg"
+        android:label="FilmFragment" >
+        <action
+            android:id="@+id/showFilmDetail"
+            app:destination="@id/filmDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/filmDetails"
+        android:name="com.eccard.starwarscharacters.ui.flimdetail.FilmDetailFrg"
+        android:label="CharacterDetail" >
+        <argument
+            android:name="film"
+            app:argType="com.eccard.starwarscharacters.data.model.Film"
+            app:nullable="false"/>
+        <action
+            android:id="@+id/showCharacterDetail"
+            app:destination="@id/characterDetail"/>
+    </fragment>
+
+</navigation>

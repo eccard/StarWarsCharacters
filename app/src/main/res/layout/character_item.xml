@@ -27,6 +27,7 @@
             app:srcCompat="@mipmap/ic_launcher"
             app:showImage="@{charPojo.charactter.imageUrl}"
             app:name="@{charPojo.charactter.name}"
+            android:contentDescription="@string/description_character_image"
             />
 
         <LinearLayout

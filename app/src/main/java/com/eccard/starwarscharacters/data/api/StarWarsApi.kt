@@ -6,9 +6,9 @@ import retrofit2.http.GET
 
 interface StarWarsApi {
 
-    @GET(Constants.CHARACTER)
+    @GET(Constants.API_CHARACTER)
     fun getCaracters() : Call<CharactterResponse>
 
-    @GET(Constants.FILMS)
+    @GET(Constants.API_FILMS)
     fun getFilms() : Call<FilmRespose>
 }

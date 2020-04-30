@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eccard.starwarscharacters.data.model.Charactter" />
         <import type="java.util.List" />
         <import type="androidx.lifecycle.LiveData"/>
+        <import type="com.eccard.starwarscharacters.data.model.CharacterAdapterPojo"/>
 
         <variable
             name="query"
             type="LiveData&lt;String>" />
 
         <variable
+            name="searchResult"
+            type="LiveData&lt;List&lt;CharacterAdapterPojo>>" />
+
+        <variable
             name="loading"
             type="boolean" />
-
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -47,9 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:id="@+id/load_more_bar"
+            android:id="@+id/loading_pbg"
             app:visibleGone="@{loading}"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +71,17 @@
             tools:listitem="@layout/character_item"
             android:id="@+id/character_list"
             android:scrollbars="vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/empty_search_result(query)}"
+            app:visibleGone="@{ !loading &amp;&amp; !query.isEmpty() &amp;&amp; searchResult.size == 0}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

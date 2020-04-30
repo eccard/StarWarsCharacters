@@ -1,16 +1,22 @@
 <resources>
-    <string name="app_name">StarWarsCharacters</string>
+    <string name="app_name">Star Wars Characters</string>
     <string name="search_hint">Insert name for film</string>
     <string name="character_image">Character image</string>
     <string name="name">Name :</string>
     <string name="gender">Gender :</string>
     <string name="launch_date">Launch date :</string>
-    <string name="first_appearance">First appearance :</string>
-    <string name="last_appearance">Last appearance :</string>
-    <string name="is_main">Is main :</string>
+    <string name="appearances">Appearances :</string>
+    <string name="character_type">Type :</string>
     <string name="films">Films</string>
     <string name="film_item_poster">Film poster</string>
     <string name="title">Title :</string>
     <string name="director">Director :</string>
     <string name="synopsis">Synopsis</string>
+    <string name="empty_search_result">No results for <b>%s</b></string>
+    <string name="main_character">Is main character</string>
+    <string name="support_character">Is support character</string>
+    <string name="characters_in_film">Characters</string>
+    <string name="description_character_image">character picture</string>
+    <string name="height">Height :</string>
+    <string name="mass">Mass :</string>
 </resources>

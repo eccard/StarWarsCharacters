@@ -1,89 +1,64 @@
 package com.eccard.starwarscharacters.ui.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.eccard.starwarscharacters.data.Repository
 import com.eccard.starwarscharacters.data.model.CharacterAdapterPojo
-import com.hadilq.liveevent.LiveEvent
-import java.util.*
+import com.eccard.starwarscharacters.testing.OpenForTesting
+import com.eccard.starwarscharacters.util.SingleLiveEvent
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(){
-
-//    val results = MutableLiveData<List<Charactter>>()
+@OpenForTesting
+class HomeViewModel @Inject constructor(val repository: Repository) : ViewModel(), Repository.SyncListener {
 
     private val _query = MutableLiveData<String>()
 
     val query : LiveData<String> = _query
 
-
-//    fun getResults() : LiveData<List<Charactter>> {
-//       return _query.switchMap {
-//        search -> if (search.isBlank()){
-//            AbsentLiveData.create()
-//        } else {
-//            repository.asLiveData()
-//        }
-//        }
-//    }
-
-//    val results : LiveData<List<Charactter>> = _query.switchMap {
-//        search -> if (search.isBlank()){
-//            repository.loadAllCharacttersFromDb()
-//            repository.asLiveData()
-//        } else {
-//            AbsentLiveData.create()
-//        }
-//    }
-
-//    fun tt(){
-//        _query.switchMap {  }
-//    }
-
     val results : LiveData<List<CharacterAdapterPojo>> = _query.switchMap {
             query -> repository.findByNameOrFilm(query)
     }
-//    val results : LiveData<List<Charactter>> = repository.asLiveData()
-
 
     fun setQuery(originalInput: String) {
-        val input = originalInput.toLowerCase(Locale.getDefault()).trim()
+        val input = originalInput.trim()
         if (input == _query.value) {
             return
         }
-//        nextPageHandler.reset()
         _query.value = input
     }
 
 
-    fun loadFromApiWithName(name : String){
-//        repository.
-    }
+    private val _loading = SingleLiveEvent<Boolean>()
 
-    private val _loading = LiveEvent<Boolean>()
-
-    val loading  : LiveData<Boolean> = _loading
+    val loading  : SingleLiveEvent<Boolean> = _loading
 
     init {
         loadFromApi()
     }
 
+    @VisibleForTesting
     fun loadFromApi(){
-
         _loading.postValue(true)
-        repository.syncListener = object : Repository.SyncListener {
-            override fun onSynced() {
-                _loading.postValue(false)
-                setQuery("")
-            }
-        }
+        repository.syncListener = this
         repository.syncWithApi()
 
     }
 
+    override fun onSynced() {
+        _loading.postValue(false)
+        setQuery("")
+    }
+
     override fun onCleared() {
+        clear()
+    }
+
+    @VisibleForTesting
+    fun clear(){
         repository.syncListener = null
     }
+
 }

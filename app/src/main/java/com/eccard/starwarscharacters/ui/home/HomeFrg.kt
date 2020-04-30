@@ -3,8 +3,6 @@ package com.eccard.starwarscharacters.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.os.IBinder
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -13,19 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
 import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.ui.MainActivity
-import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
+import com.eccard.starwarscharacters.util.autoCleared
+import com.eccard.starwarscharacters.util.common.SimpleDividerItemDecoration
 import javax.inject.Inject
 
 class HomeFrg : Fragment(), Injectable {
-
-    companion object {
-        val TAG = HomeFrg::class.simpleName
-    }
 
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
@@ -33,11 +28,11 @@ class HomeFrg : Fragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    lateinit var binding : HomeFrgBinding
+    private var binding by autoCleared<HomeFrgBinding>()
 
-    private lateinit var adapter: CharacterAdapter
+    private var adapter by autoCleared<CharacterAdapter>()
 
-    val viewModel: HomeViewModel by viewModels {
+    private val viewModel: HomeViewModel by viewModels {
         viewModelFactory
     }
 
@@ -56,6 +51,7 @@ class HomeFrg : Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.lifecycleOwner = viewLifecycleOwner
         initRecyclerView()
         initSearchInputListener()
         viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
@@ -72,7 +68,8 @@ class HomeFrg : Fragment(), Injectable {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_films -> {
-                (activity as MainActivity).navigateToFilmFrg()
+                dismissKeyboard(binding.input.windowToken)
+                findNavController().navigate(HomeFrgDirections.showFilms())
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -82,7 +79,7 @@ class HomeFrg : Fragment(), Injectable {
     private fun initRecyclerView() {
 
         val rvAdapter = CharacterAdapter(appExecutors = appExecutors){
-            character -> (activity as MainActivity).navigateToDetailsFrg(character.charactter)
+            findNavController().navigate(HomeFrgDirections.showCharacterDetail(it.charactter))
         }
 
         binding.query = viewModel.query
@@ -90,27 +87,14 @@ class HomeFrg : Fragment(), Injectable {
         adapter = rvAdapter
 
         binding.characterList.addItemDecoration(SimpleDividerItemDecoration(binding.characterList.context))
+        binding.searchResult = viewModel.results
         viewModel.results.observe(viewLifecycleOwner, Observer { result ->
             adapter.submitList(result)
         })
     }
 
 
-    // todo se for ficar abaixo com action up não precisa dessesky
     private fun initSearchInputListener() {
-
-        binding.input.addTextChangedListener(object :TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                doSearch(binding.input,false)
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-
         binding.input.setOnEditorActionListener { view: View, actionId: Int, _: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 doSearch(view)
@@ -120,8 +104,7 @@ class HomeFrg : Fragment(), Injectable {
             }
         }
         binding.input.setOnKeyListener { view: View, keyCode: Int, event: KeyEvent ->
-//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-            if (event.action == KeyEvent.ACTION_UP ) {
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 doSearch(view)
                 true
             } else {

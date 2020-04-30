@@ -2,7 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-allopen'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
+allOpen {
+    // allows mocking for classes w/o directly opening them for release builds
+    annotation 'com.eccard.starwarscharacters.testing.OpenClass'
+}
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -14,27 +21,32 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.eccard.starwarscharacters.util.StarWarsCharactersTestRunner"
     }
 
     buildTypes {
-        def TYPE_STRING = "String"
-        def VAR_NAME_BASE_URL = "BASE_URL"
-        def BASE_URL = "https://starco.api"
-
-        debug {
-            buildConfigField TYPE_STRING, VAR_NAME_BASE_URL, "\"" + BASE_URL + "\""
-        }
         release {
-            buildConfigField TYPE_STRING, VAR_NAME_BASE_URL, "\"" + BASE_URL + "\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
+    buildTypes.each {
+        def TYPE_STRING = "String"
+        def VAR_NAME_BASE_URL = "BASE_URL"
+        def BASE_URL = "https://starco.api"
+
+        it.buildConfigField TYPE_STRING, VAR_NAME_BASE_URL, "\"" + BASE_URL + "\""
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        test.java.srcDirs += "src/test-common/java"
     }
 
     kotlinOptions {
@@ -48,11 +60,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
 
     implementation deps.kotlin.stdlib
-    implementation deps.kotlin.reflect
     implementation deps.app_compat
     implementation deps.recyclerview
     implementation deps.cardview
@@ -71,19 +80,19 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.java8
-    implementation deps.fragment.runtime_ktx
-    implementation deps.room.runtime
+    implementation deps.fragment.testing
+    implementation deps.androidyoutubeplayer
 
     implementation deps.timber
 
     implementation deps.coil
     implementation deps.avatargenerator
-    implementation deps.liveevent
     implementation deps.pallete
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.navigation_ui_ktx
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
-    kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 
 
@@ -91,11 +100,10 @@ dependencies {
     testImplementation deps.mock_web_server
     testImplementation deps.arch_core.testing
     testImplementation deps.mockito.core
+    testImplementation deps.retrofit.mock
 
-    androidTestImplementation deps.atsl.core
     androidTestImplementation deps.atsl.ext_junit
     androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.atsl.rules
 
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.contrib
@@ -103,5 +111,12 @@ dependencies {
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
+}
 
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
 }

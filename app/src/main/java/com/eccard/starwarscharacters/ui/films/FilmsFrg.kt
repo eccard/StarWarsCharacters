@@ -10,26 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eccard.starwarscharacters.AppExecutors
 import com.eccard.starwarscharacters.R
-import com.eccard.starwarscharacters.data.model.Film
-import com.eccard.starwarscharacters.databinding.FilmItemBinding
 import com.eccard.starwarscharacters.databinding.FilmsFrgBinding
-import com.eccard.starwarscharacters.databinding.HomeFrgBinding
 import com.eccard.starwarscharacters.di.Injectable
-import com.eccard.starwarscharacters.ui.MainActivity
-import com.eccard.starwarscharacters.ui.common.ItemOffsetDecoration
-import com.eccard.starwarscharacters.ui.common.SimpleDividerItemDecoration
-import com.eccard.starwarscharacters.ui.home.CharacterAdapter
-import com.eccard.starwarscharacters.ui.home.HomeViewModel
+import com.eccard.starwarscharacters.util.common.ItemOffsetDecoration
+import com.eccard.starwarscharacters.util.autoCleared
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class FilmsFrg: Fragment(), Injectable {
-    companion object {
-        val TAG = FilmsFrg::class.simpleName
-    }
 
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
@@ -37,11 +29,11 @@ class FilmsFrg: Fragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    lateinit var binding : FilmsFrgBinding
+    private var binding by autoCleared<FilmsFrgBinding>()
 
-    lateinit var adapter : FilmsAdapter
+    private var adapter by autoCleared<FilmsAdapter>()
 
-    val viewModel: FilmsViewModel by viewModels {
+    private val viewModel: FilmsViewModel by viewModels {
         viewModelFactory
     }
 
@@ -55,13 +47,15 @@ class FilmsFrg: Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.loading = true
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
 
         val posterWidth = binding.rvFilms.context.resources.getDimension(R.dimen.img_view_film_width)
-        val display = activity!!.windowManager.defaultDisplay
+        val display = requireActivity().windowManager.defaultDisplay
         val outMetrics = DisplayMetrics()
         display.getMetrics(outMetrics)
         val screenWidth = outMetrics.widthPixels.toFloat()
@@ -71,18 +65,17 @@ class FilmsFrg: Fragment(), Injectable {
         binding.rvFilms.layoutManager = layoutManager
 
         val rvAdapter = FilmsAdapter(appExecutors = appExecutors){
-                film -> (activity as MainActivity).navigateToFilmDetailFrg(film)
+                findNavController().navigate(FilmsFrgDirections.showFilmDetail(it))
         }
         adapter = rvAdapter
         binding.rvFilms.adapter = adapter
 
         binding.rvFilms.addItemDecoration(ItemOffsetDecoration(binding.rvFilms.context,R.dimen.grid_spacing_small))
 
-        viewModel.films.observe(viewLifecycleOwner, Observer<List<Film>?> {films ->
+        viewModel.films.observe(viewLifecycleOwner, Observer{ films ->
             adapter.submitList(films)
+            binding.loading = false
         })
-
-
     }
 
 }

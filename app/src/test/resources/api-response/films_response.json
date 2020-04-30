@@ -1,0 +1,37 @@
+{
+  "total_count" : 3,
+  "items": [
+    {
+      "id": 0,
+      "name" : "A New Hope",
+      "complete_name": "Star Wars: Episode IV - A New Hope (1977)",
+      "launch_date": "1977-05-25",
+      "character_ids": [4,10,5,55,3,8,7,11,0],
+      "synopsis" : "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+      "director" : "George Lucas",
+      "cover_album" : "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,643,1000_AL_.jpg",
+      "trailer" : "https://www.youtube.com/watch?v=1g3_CFmnU7k"
+    },
+    {
+      "id": 1,
+      "name" : "The Empire Strikes Back",
+      "complete_name": "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "launch_date": "1980-05-21",
+      "character_ids": [4,10,5,8,0,11,7,6,3,20,63],
+      "synopsis" : "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader and a bounty hunter named Boba Fett all over the galaxy.",
+      "director": "Irvin Kershner",
+      "cover_album" : "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,641,1000_AL_.jpg",
+      "trailer" : "https://www.youtube.com/watch?v=JNwNXF9Y6kY"
+    },
+    {
+      "id": 2,
+      "name" : "Return of the Jedi",
+      "complete_name": "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "launch_date": "1983-05-25",
+      "character_ids": [4,10,5,18,8,11,0,6,3,7,38,65,90,20],
+      "synopsis" : "After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor's trap.",
+      "director": "Richard Marquand",
+      "cover_album" : "https://m.media-amazon.com/images/M/MV5BOWZlMjFiYzgtMTUzNC00Y2IzLTk1NTMtZmNhMTczNTk0ODk1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SY999_CR0,0,644,999_AL_.jpg",
+      "trailer" : "https://www.youtube.com/watch?v=5UfA_aKBGMc"
+    }]
+}
