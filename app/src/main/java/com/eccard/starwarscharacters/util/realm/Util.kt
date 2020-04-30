@@ -13,7 +13,7 @@ class Util{
         fun getRealm(): Realm {
             val config = RealmConfiguration.Builder()
                 .name("starWars.realm")
-                .schemaVersion(2)
+                .schemaVersion(3)
                 .deleteRealmIfMigrationNeeded()
                 .build()
             return Realm.getInstance(config);

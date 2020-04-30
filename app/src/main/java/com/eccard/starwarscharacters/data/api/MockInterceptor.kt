@@ -18,10 +18,10 @@ class MockInterceptor : Interceptor {
 
         val responseString = when (uri) {
             BuildConfig.BASE_URL + "/" + Constants.API_CHARACTER -> {
-                getCharacters
+                getCharacters()
             }
             BuildConfig.BASE_URL + "/" + Constants.API_FILMS -> {
-                getFilms
+                getFilms()
             }
             else -> {
                 ""

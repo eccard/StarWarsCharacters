@@ -2,7 +2,7 @@ package com.eccard.starwarscharacters.data.api
 
 class FilmResponseMock {
     companion object {
-        const val getFilms = """
+        fun getFilms() = """
 {
     "total_count" : 9,
     "items": [
