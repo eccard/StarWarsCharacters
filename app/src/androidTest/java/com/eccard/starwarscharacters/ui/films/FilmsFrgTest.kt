@@ -77,10 +77,10 @@ class FilmsFrgTest {
     fun listFilms(){
         val filmList = getFilmsList()
         results.postValue(filmList)
-        Espresso.onView(RecyclerViewMatcher(R.id.character_list).atPosition(0))
+        Espresso.onView(RecyclerViewMatcher(R.id.rv_films).atPosition(0))
             .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(filmList[0].name))))
 
-        Espresso.onView(RecyclerViewMatcher(R.id.character_list).atPosition(1))
+        Espresso.onView(RecyclerViewMatcher(R.id.rv_films).atPosition(1))
             .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(filmList[1].name))))
 
     }
